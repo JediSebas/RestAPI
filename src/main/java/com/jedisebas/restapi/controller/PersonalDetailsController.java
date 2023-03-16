@@ -1,5 +1,7 @@
 package com.jedisebas.restapi.controller;
 
+import com.jedisebas.restapi.dto.CreatedPersonResponse;
+import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.service.PersonalDetailsService;
 import org.apache.logging.log4j.LogManager;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @RestController()
 public class PersonalDetailsController {
@@ -19,9 +20,7 @@ public class PersonalDetailsController {
     private PersonalDetailsService service;
 
     @PostMapping("/persons")
-    public PersonalDetails create(@RequestBody final PersonalDetails personalDetails) {
-        PersonalDetails p = service.createPersonalDetails(personalDetails);
-        LOGGER.info(p);
-        return p;
+    public CreatedPersonResponse create(@RequestBody final PersonalDetailsDto personalDTO) {
+        return service.createPersonalDetails(personalDTO);
     }
 }

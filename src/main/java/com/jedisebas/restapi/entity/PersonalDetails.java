@@ -1,5 +1,6 @@
 package com.jedisebas.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +9,9 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonalDetails {
 
     @Id
@@ -17,9 +20,11 @@ public class PersonalDetails {
     private Integer id;
 
     @Column(name = "first_name")
+    @JsonProperty("first_name")
     private String firstName;
 
     @Column(name = "last_name")
+    @JsonProperty("last_name")
     private String lastName;
     private String address;
     private String email;
