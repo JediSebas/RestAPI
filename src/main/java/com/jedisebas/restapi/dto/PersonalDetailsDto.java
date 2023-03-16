@@ -1,11 +1,13 @@
 package com.jedisebas.restapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonalDetailsDto {
 
     @JsonProperty("first_name")
