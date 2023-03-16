@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +35,19 @@ public class PersonalDetailsService {
 
     public List<PersonalDetailsDto> fetchAllPersonalDetails() {
         List<PersonalDetailsDto> toReturn = new ArrayList<>();
-        repository.findAll().forEach(personalDetails -> toReturn.add(mapper.entityToDto(personalDetails)));
+        repository.findAll().forEach(personalDetails -> toReturn.add(mapper.entityToDto(personalDetails).anonymize()));
 
         return toReturn;
+    }
+
+    public PersonalDetailsDto fetchPersonalDetails(final int id) {
+        final Optional<PersonalDetails> persons = repository.findById(id);
+
+        if (persons.isPresent()) {
+            final PersonalDetails personalDetails = persons.get();
+            return mapper.entityToDto(personalDetails).anonymize();
+        }
+
+        return null;
     }
 }

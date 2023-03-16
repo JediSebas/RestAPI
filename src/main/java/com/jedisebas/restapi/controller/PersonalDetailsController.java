@@ -2,15 +2,11 @@ package com.jedisebas.restapi.controller;
 
 import com.jedisebas.restapi.dto.CreatedPersonResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
-import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.service.PersonalDetailsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +26,10 @@ public class PersonalDetailsController {
     @GetMapping("/persons")
     public List<PersonalDetailsDto> getAll() {
         return service.fetchAllPersonalDetails();
+    }
+
+    @GetMapping("/persons/{id}")
+    public PersonalDetailsDto getById(@PathVariable int id) {
+        return service.fetchPersonalDetails(id);
     }
 }

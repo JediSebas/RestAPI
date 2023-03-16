@@ -17,4 +17,9 @@ public class PersonalDetailsDto {
     private String lastName;
     private String address;
     private String email;
+
+    public PersonalDetailsDto anonymize() {
+        lastName = String.valueOf(lastName.charAt(0));
+        return this;
+    }
 }
