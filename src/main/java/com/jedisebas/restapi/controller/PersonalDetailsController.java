@@ -22,7 +22,7 @@ public class PersonalDetailsController {
 
     @PostMapping("/persons")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedPersonResponse create(@RequestBody final PersonalDetailsDto personalDTO) {
+    public CreatedPersonResponse addPersonDetails(@RequestBody final PersonalDetailsDto personalDTO) {
         return service.createPersonalDetails(personalDTO);
     }
 
