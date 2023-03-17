@@ -6,8 +6,6 @@ import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
 import com.jedisebas.restapi.repository.PersonalDetailsRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,8 +17,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PersonalDetailsService {
-
-    private static final Logger LOGGER = LogManager.getLogger();
 
     private final PersonalDetailsRepository repository;
     private final PersonalDetailsMapper mapper;
