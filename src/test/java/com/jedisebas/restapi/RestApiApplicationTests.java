@@ -3,7 +3,6 @@ package com.jedisebas.restapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
-import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
 import com.jedisebas.restapi.repository.PersonalDetailsRepository;
 import com.jedisebas.restapi.service.PersonalDetailsService;
@@ -59,6 +58,6 @@ class RestApiApplicationTests {
 
 		PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
 
-		assertEquals(personalDetailsDto.getFirstName(), testIfWorks.getFirstName());
+		assertEquals(personalDetailsDto.getAddress(), testIfWorks.getAddress());
 	}
 }
