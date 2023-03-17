@@ -45,6 +45,6 @@ public class PersonalDetailsService {
             return mapper.entityToDto(personalDetails);
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "person_details with this id does not exist");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found");
     }
 }
