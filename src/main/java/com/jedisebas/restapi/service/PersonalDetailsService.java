@@ -8,7 +8,9 @@ import com.jedisebas.restapi.repository.PersonalDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,6 @@ public class PersonalDetailsService {
             return mapper.entityToDto(personalDetails);
         }
 
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "person_details with this id does not exist");
     }
 }
