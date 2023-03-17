@@ -45,7 +45,7 @@ public class PersonalDetailsService {
 
         if (persons.isPresent()) {
             final PersonalDetails personalDetails = persons.get();
-            return mapper.entityToDto(personalDetails).anonymize();
+            return mapper.entityToDto(personalDetails);
         }
 
         return null;
