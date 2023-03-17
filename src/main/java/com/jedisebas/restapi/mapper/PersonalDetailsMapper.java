@@ -46,7 +46,7 @@ public class PersonalDetailsMapper {
     private String anonymizeEmail(final String email) {
         final StringBuilder emailBuilder = new StringBuilder();
         emailBuilder.append(email.charAt(0));
-        emailBuilder.append("*".repeat(3));
+        emailBuilder.append("***");
 
         int i = 4;
         while (email.charAt(i + 1) != '@') {
@@ -58,7 +58,7 @@ public class PersonalDetailsMapper {
             i++;
         }
 
-        emailBuilder.append("*".repeat(3));
+        emailBuilder.append("***");
 
         while (email.charAt(i + 1) != '.') {
             i++;
