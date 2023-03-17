@@ -22,8 +22,16 @@ public class PersonalDetailsService {
     private final PersonalDetailsMapper mapper;
 
     public CreatedPersonResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
+        if (personalDto.getFirstName().isEmpty() || personalDto.getLastName().isEmpty() ||
+            personalDto.getAddress().isEmpty() || personalDto.getEmail().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
 
-        // validation
+        if (personalDto.getFirstName().length() > 50 || personalDto.getLastName().length() > 50 ||
+                personalDto.getEmail().length() > 50) {
+            throw new IllegalArgumentException();
+        }
+
         PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);
         PersonalDetails savedEntity = repository.save(personalDetails);
 
