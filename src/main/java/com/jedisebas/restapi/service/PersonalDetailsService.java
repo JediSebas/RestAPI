@@ -31,8 +31,7 @@ public class PersonalDetailsService {
         PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);
         PersonalDetails savedEntity = repository.save(personalDetails);
 
-        // move to mapper to keep nice and tidy interface
-        return new CreatedPersonResponse(savedEntity.getId());
+        return mapper.entityToResponse(savedEntity);
     }
 
     public List<PersonalDetailsDto> fetchAllPersonalDetails() {
