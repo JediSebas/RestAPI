@@ -32,7 +32,7 @@ public class PersonalDetailsService {
 
     public List<PersonalDetailsDto> fetchAllPersonalDetails() {
         List<PersonalDetailsDto> toReturn = new ArrayList<>();
-        repository.findAll().forEach(personalDetails -> toReturn.add(mapper.entityToDto(personalDetails).anonymize()));
+        repository.findAll().forEach(personalDetails -> toReturn.add(mapper.entityToDtoAnonymized(personalDetails)));
 
         return toReturn;
     }
