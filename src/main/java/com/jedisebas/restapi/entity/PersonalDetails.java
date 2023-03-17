@@ -1,6 +1,7 @@
 package com.jedisebas.restapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jedisebas.restapi.Constants;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -29,12 +30,12 @@ public class PersonalDetails {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "first_name")
-    @JsonProperty("first_name")
+    @Column(name = Constants.FIRST_NAME)
+    @JsonProperty(Constants.FIRST_NAME)
     private String firstName;
 
-    @Column(name = "last_name")
-    @JsonProperty("last_name")
+    @Column(name = Constants.LAST_NAME)
+    @JsonProperty(Constants.LAST_NAME)
     private String lastName;
     private String address;
     private String email;

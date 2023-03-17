@@ -1,6 +1,7 @@
 package com.jedisebas.restapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jedisebas.restapi.Constants;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PersonalDetailsDto {
 
-    @JsonProperty("first_name")
+    @JsonProperty(Constants.FIRST_NAME)
     private String firstName;
 
-    @JsonProperty("last_name")
+    @JsonProperty(Constants.LAST_NAME)
     private String lastName;
     private String address;
     private String email;
