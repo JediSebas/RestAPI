@@ -6,25 +6,22 @@ import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
 import com.jedisebas.restapi.repository.PersonalDetailsRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 class PersonalDetailsServiceTest {
-
-    @Mock
-    private PersonalDetailsMapper mapper;
-
-    @Mock
-    private PersonalDetailsRepository repository;
-
-    @InjectMocks
-    private PersonalDetailsService service;
 
     @Test
     void test1() {
+        PersonalDetailsMapper mapper = mock(PersonalDetailsMapper.class);
+        PersonalDetailsRepository repository = mock(PersonalDetailsRepository.class);
+        PersonalDetailsService service = mock(PersonalDetailsService.class);
+
         PersonalDetailsDto requestBody = new PersonalDetailsDto();
         PersonalDetails expectedEntityToSave = new PersonalDetails();
         PersonalDetails savedEntity = new PersonalDetails();
