@@ -40,12 +40,10 @@ public class PersonalDetailsDto {
             i++;
         }
 
-        emailBuilder.append(email.charAt(i));
-        i++;
-        emailBuilder.append(email.charAt(i));
-        i++;
-        emailBuilder.append(email.charAt(i));
-        i++;
+        for (int j = 0; j < 3; j++) {
+            emailBuilder.append(email.charAt(i));
+            i++;
+        }
 
         emailBuilder.append("*".repeat(3));
 
@@ -53,13 +51,14 @@ public class PersonalDetailsDto {
             i++;
         }
 
-        emailBuilder.append(email.charAt(i));
-        i++;
-        emailBuilder.append(email.charAt(i));
-        i++;
-
-        for (; i < email.length(); i++) {
+        for (int j = 0; j < 2; j++) {
             emailBuilder.append(email.charAt(i));
+            i++;
+        }
+
+        while (i < email.length()) {
+            emailBuilder.append(email.charAt(i));
+            i++;
         }
 
         return emailBuilder.toString();
