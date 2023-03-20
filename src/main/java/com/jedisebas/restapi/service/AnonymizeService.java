@@ -12,35 +12,27 @@ public class AnonymizeService {
     }
 
     public static String anonymizeEmail(final String email) {
+        final String[] splitEmail = email.split("@");
+
+        final String local = splitEmail[0];
+        final String domain = splitEmail[1];
+
         final StringBuilder emailBuilder = new StringBuilder();
-        emailBuilder.append(email.charAt(0));
+        emailBuilder.append(local.charAt(0));
         emailBuilder.append("***");
+        emailBuilder.append(local.charAt(local.length() - 1));
+        emailBuilder.append("@");
 
-        int i = 4;
-        while (email.charAt(i + 1) != '@') {
-            i++;
-        }
+        final String[] splitDomain = domain.split("\\.");
 
-        for (int j = 0; j < 3; j++) {
-            emailBuilder.append(email.charAt(i));
-            i++;
-        }
+        final String beforeDot = splitDomain[0];
+        final String afterDot = splitDomain[1];
 
+        emailBuilder.append(beforeDot.charAt(0));
         emailBuilder.append("***");
-
-        while (email.charAt(i + 1) != '.') {
-            i++;
-        }
-
-        for (int j = 0; j < 2; j++) {
-            emailBuilder.append(email.charAt(i));
-            i++;
-        }
-
-        while (i < email.length()) {
-            emailBuilder.append(email.charAt(i));
-            i++;
-        }
+        emailBuilder.append(beforeDot.charAt(beforeDot.length() - 1));
+        emailBuilder.append(".");
+        emailBuilder.append(afterDot);
 
         return emailBuilder.toString();
     }
