@@ -56,7 +56,7 @@ class PersonalDetailsMapperTest {
     void givenEntity_whenMapping_thenReturnResponse() {
         PersonalDetailsMapper mapper = new PersonalDetailsMapper();
 
-        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
+        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetailsWithId();
 
         CreatedPersonResponse response = mapper.entityToResponse(entity);
 

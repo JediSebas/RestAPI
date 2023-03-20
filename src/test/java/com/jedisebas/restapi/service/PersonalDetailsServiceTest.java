@@ -1,5 +1,6 @@
 package com.jedisebas.restapi.service;
 
+import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.CreatedPersonResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
@@ -39,7 +40,7 @@ class PersonalDetailsServiceTest {
 
     @Test
     void createPersonalDetailsSuccessful() {
-        PersonalDetailsDto requestBody = new PersonalDetailsDto();
+        PersonalDetailsDto requestBody = TestDataProvider.createProperlyPersonalDetailsDto();
         PersonalDetails expectedEntityToSave = new PersonalDetails();
         PersonalDetails savedEntity = new PersonalDetails();
         CreatedPersonResponse response = new CreatedPersonResponse(ID);

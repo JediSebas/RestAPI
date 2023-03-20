@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
 public class ValidatorService {
 
     public void extracted(final PersonalDetailsDto personalDto) {
+        if (personalDto.getFirstName() == null || personalDto.getLastName() == null ||
+                personalDto.getAddress() == null || personalDto.getEmail() == null) {
+            throw new IllegalArgumentException();
+        }
+
         if (personalDto.getFirstName().isEmpty() || personalDto.getLastName().isEmpty() ||
                 personalDto.getAddress().isEmpty() || personalDto.getEmail().isEmpty()) {
             throw new IllegalArgumentException();

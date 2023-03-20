@@ -17,6 +17,16 @@ public class TestDataProvider {
                 .build();
     }
 
+    public static PersonalDetails createProperlyPersonalDetailsWithId() {
+        return PersonalDetails.builder()
+                .id(1)
+                .firstName("Szymon")
+                .lastName("Marciniak")
+                .address("Kalisz")
+                .email("szymonmarciniak@gmail.com")
+                .build();
+    }
+
     public static PersonalDetailsDto createProperlyPersonalDetailsDto() {
         return PersonalDetailsDto.builder()
                 .firstName("Szymon")
