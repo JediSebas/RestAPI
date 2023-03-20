@@ -17,6 +17,15 @@ public class PersonalDetailsMapper {
                 .build();
     }
 
+    public PersonalDetailsDto entityToDto(PersonalDetails personalDetails) {
+        return PersonalDetailsDto.builder()
+                .firstName(personalDetails.getFirstName())
+                .lastName(personalDetails.getLastName())
+                .email(personalDetails.getEmail())
+                .address(personalDetails.getAddress())
+                .build();
+    }
+
     public CreatedPersonResponse entityToResponse(PersonalDetails savedEntity) {
         return new CreatedPersonResponse(savedEntity.getId());
     }
