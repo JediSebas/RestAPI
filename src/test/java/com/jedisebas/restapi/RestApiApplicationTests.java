@@ -2,6 +2,7 @@ package com.jedisebas.restapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
 import com.jedisebas.restapi.repository.PersonalDetailsRepository;
@@ -39,21 +40,23 @@ class RestApiApplicationTests {
 
 	@Test
 	void personalDetailsCreate() throws Exception {
-		PersonalDetailsDto personalDetailsDto = PersonalDetailsDto.builder()
-				.firstName("Szymon")
-				.lastName("Marciniak")
-				.address("Kalisz")
-				.email("szymonmarciniak@gmail.com")
-				.build();
+		PersonalDetailsDto personalDetailsDto = TestDataProvider.createProperlyPersonalDetailsDto();
+		String ownJson = """
+				{
+				    "first_name": "Szymon",
+				    "last_name": "Marciniak",
+				    "address": "Kalisz",
+				    "email": "szymonmarciniak22@gmail.com"
+				}
+				""";
 
 		GsonBuilder builder = new GsonBuilder();
 		builder.setPrettyPrinting();
 		Gson gson = builder.create();
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/persons")
+		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
-				.param("personalDto", gson.toJson(personalDetailsDto))
-				.content(gson.toJson(personalDetailsDto))
+				.content(ownJson)
 		);
 
 		PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
