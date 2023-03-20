@@ -22,8 +22,8 @@ public class PersonalDetailsController {
 
     @PostMapping("/persons")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedPersonResponse addPersonDetails(@RequestBody final PersonalDetailsDto personalDTO) {
-        return service.createPersonalDetails(personalDTO);
+    public CreatedPersonResponse addPersonDetails(@RequestBody final PersonalDetailsDto personalDto) {
+        return service.createPersonalDetails(personalDto);
     }
 
     @GetMapping("/persons")
