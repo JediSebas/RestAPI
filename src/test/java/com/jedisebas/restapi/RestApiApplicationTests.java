@@ -56,7 +56,6 @@ class RestApiApplicationTests {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
-				.param("personalDto", ownJson)
 				.content(ownJson)
 		);
 
