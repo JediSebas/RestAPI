@@ -3,6 +3,7 @@ package com.jedisebas.restapi.mapper;
 import com.jedisebas.restapi.dto.CreatedPersonResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
+import com.jedisebas.restapi.service.AnonymizeService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,51 +30,13 @@ public class PersonalDetailsMapper {
     public PersonalDetailsDto entityToDtoAnonymized(PersonalDetails personalDetails) {
         return PersonalDetailsDto.builder()
                 .firstName(personalDetails.getFirstName())
-                .lastName(anonymizeLastName(personalDetails.getLastName()))
-                .email(anonymizeEmail(personalDetails.getEmail()))
+                .lastName(AnonymizeService.anonymizeLastName(personalDetails.getLastName()))
+                .email(AnonymizeService.anonymizeEmail(personalDetails.getEmail()))
                 .address(personalDetails.getAddress())
                 .build();
     }
 
     public CreatedPersonResponse entityToResponse(PersonalDetails savedEntity) {
         return new CreatedPersonResponse(savedEntity.getId());
-    }
-
-    private String anonymizeLastName(final String lastName) {
-        return lastName.charAt(0) + "*".repeat(lastName.length() - 1);
-    }
-
-    private String anonymizeEmail(final String email) {
-        final StringBuilder emailBuilder = new StringBuilder();
-        emailBuilder.append(email.charAt(0));
-        emailBuilder.append("***");
-
-        int i = 4;
-        while (email.charAt(i + 1) != '@') {
-            i++;
-        }
-
-        for (int j = 0; j < 3; j++) {
-            emailBuilder.append(email.charAt(i));
-            i++;
-        }
-
-        emailBuilder.append("***");
-
-        while (email.charAt(i + 1) != '.') {
-            i++;
-        }
-
-        for (int j = 0; j < 2; j++) {
-            emailBuilder.append(email.charAt(i));
-            i++;
-        }
-
-        while (i < email.length()) {
-            emailBuilder.append(email.charAt(i));
-            i++;
-        }
-
-        return emailBuilder.toString();
     }
 }
