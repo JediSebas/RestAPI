@@ -1,5 +1,6 @@
 package com.jedisebas.restapi.mapper;
 
+import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.CreatedPersonResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
@@ -13,12 +14,7 @@ class PersonalDetailsMapperTest {
     void givenDto_whenMapping_thenReturnEntity() {
         PersonalDetailsMapper mapper = new PersonalDetailsMapper();
 
-        PersonalDetailsDto dto = PersonalDetailsDto.builder()
-                .firstName("Szymon")
-                .lastName("Marciniak")
-                .address("Kalisz")
-                .email("szymonmarciniak@gmail.com")
-                .build();
+        PersonalDetailsDto dto = TestDataProvider.createProperlyPersonalDetailsDto();
 
         PersonalDetails entity = mapper.dtoToEntity(dto);
 
@@ -32,12 +28,7 @@ class PersonalDetailsMapperTest {
     void givenEntity_whenMapping_thenReturnDto() {
         PersonalDetailsMapper mapper = new PersonalDetailsMapper();
 
-        PersonalDetails entity = PersonalDetails.builder()
-                .firstName("Szymon")
-                .lastName("Marciniak")
-                .address("Kalisz")
-                .email("szymonmarciniak@gmail.com")
-                .build();
+        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
 
         PersonalDetailsDto dto = mapper.entityToDto(entity);
 
@@ -51,12 +42,7 @@ class PersonalDetailsMapperTest {
     void givenEntity_whenAnonymizedMapping_thenReturnDto() {
         PersonalDetailsMapper mapper = new PersonalDetailsMapper();
 
-        PersonalDetails entity = PersonalDetails.builder()
-                .firstName("Szymon")
-                .lastName("Marciniak")
-                .address("Kalisz")
-                .email("szymonmarciniak@gmail.com")
-                .build();
+        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
 
         PersonalDetailsDto dto = mapper.entityToDtoAnonymized(entity);
 
@@ -70,13 +56,7 @@ class PersonalDetailsMapperTest {
     void givenEntity_whenMapping_thenReturnResponse() {
         PersonalDetailsMapper mapper = new PersonalDetailsMapper();
 
-        PersonalDetails entity = PersonalDetails.builder()
-                .id(1)
-                .firstName("Szymon")
-                .lastName("Marciniak")
-                .address("Kalisz")
-                .email("szymonmarciniak@gmail.com")
-                .build();
+        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
 
         CreatedPersonResponse response = mapper.entityToResponse(entity);
 
