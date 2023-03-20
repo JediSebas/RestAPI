@@ -1,8 +1,19 @@
 package com.jedisebas.restapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import lombok.*;
+import com.jedisebas.restapi.Constants;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "personal_details")
@@ -19,12 +30,12 @@ public class PersonalDetails {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "first_name")
-    @JsonProperty("first_name")
+    @Column(name = Constants.FIRST_NAME)
+    @JsonProperty(Constants.FIRST_NAME)
     private String firstName;
 
-    @Column(name = "last_name")
-    @JsonProperty("last_name")
+    @Column(name = Constants.LAST_NAME)
+    @JsonProperty(Constants.LAST_NAME)
     private String lastName;
     private String address;
     private String email;
