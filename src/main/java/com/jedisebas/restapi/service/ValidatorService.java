@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 @NoArgsConstructor
 public class ValidatorService {
 
-    public void extracted(final PersonalDetailsDto personalDto) {
+    public void validatePersonalDetailsDtoFields(final PersonalDetailsDto personalDto) {
         if (personalDto.getFirstName() == null || personalDto.getLastName() == null ||
                 personalDto.getAddress() == null || personalDto.getEmail() == null) {
             throw new IllegalArgumentException();

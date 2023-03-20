@@ -22,7 +22,7 @@ public class PersonalDetailsService {
 
     public CreatedPersonResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
         ValidatorService validator = new ValidatorService();
-        validator.extracted(personalDto);
+        validator.validatePersonalDetailsDtoFields(personalDto);
 
         PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);
         PersonalDetails savedEntity = repository.save(personalDetails);
