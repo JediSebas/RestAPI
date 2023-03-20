@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AnonymizeService {
 
-
     public static String anonymizeLastName(final String lastName) {
         return lastName.charAt(0) + "*".repeat(lastName.length() - 1);
     }
