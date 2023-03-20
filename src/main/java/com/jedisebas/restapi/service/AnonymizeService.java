@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 public class AnonymizeService {
 
     public static String anonymizeLastName(String lastName) {
-        if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
+        throwWhenNullOrEmpty(lastName);
 
         lastName = lastName.trim();
 
@@ -17,9 +15,7 @@ public class AnonymizeService {
     }
 
     public static String anonymizeEmail(String email) {
-        if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
+        throwWhenNullOrEmpty(email);
 
         email = email.trim();
 
@@ -48,5 +44,11 @@ public class AnonymizeService {
         emailBuilder.append(lastPart);
 
         return emailBuilder.toString();
+    }
+
+    private static void throwWhenNullOrEmpty(String string) {
+        if (string == null || string.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
     }
 }
