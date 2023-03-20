@@ -6,11 +6,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AnonymizeService {
 
-    public static String anonymizeLastName(final String lastName) {
+    public static String anonymizeLastName(String lastName) {
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        lastName = lastName.trim();
+
         return lastName.charAt(0) + "*".repeat(lastName.length() - 1);
     }
 
-    public static String anonymizeEmail(final String email) {
+    public static String anonymizeEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        email = email.trim();
+
         final String[] splitEmail = email.split("@");
 
         final String local = splitEmail[0];
@@ -24,14 +36,16 @@ public class AnonymizeService {
 
         final String[] splitDomain = domain.split("\\.");
 
-        final String beforeDot = splitDomain[0];
-        final String afterDot = splitDomain[1];
+        final String lastPart = splitDomain[splitDomain.length - 1];
 
-        emailBuilder.append(beforeDot.charAt(0));
-        emailBuilder.append("***");
-        emailBuilder.append(beforeDot.charAt(beforeDot.length() - 1));
-        emailBuilder.append(".");
-        emailBuilder.append(afterDot);
+        for (int i = 0; i < splitDomain.length - 1; i++) {
+            final String part = splitDomain[i];
+            emailBuilder.append(part.charAt(0));
+            emailBuilder.append("***");
+            emailBuilder.append(part.charAt(part.length() - 1));
+            emailBuilder.append(".");
+        }
+        emailBuilder.append(lastPart);
 
         return emailBuilder.toString();
     }
