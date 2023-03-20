@@ -12,7 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,15 +21,8 @@ public class PersonalDetailsService {
     private final PersonalDetailsMapper mapper;
 
     public CreatedPersonResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
-        if (personalDto.getFirstName().isEmpty() || personalDto.getLastName().isEmpty() ||
-            personalDto.getAddress().isEmpty() || personalDto.getEmail().isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-
-        if (personalDto.getFirstName().length() > 50 || personalDto.getLastName().length() > 50 ||
-                personalDto.getEmail().length() > 50) {
-            throw new IllegalArgumentException();
-        }
+        ValidatorService validator = new ValidatorService();
+        validator.extracted(personalDto);
 
         PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);
         PersonalDetails savedEntity = repository.save(personalDetails);
@@ -46,13 +38,10 @@ public class PersonalDetailsService {
     }
 
     public PersonalDetailsDto fetchPersonalDetails(final int id) {
-        final Optional<PersonalDetails> persons = repository.findById(id);
+        final PersonalDetails persons = repository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
 
-        if (persons.isPresent()) {
-            final PersonalDetails personalDetails = persons.get();
-            return mapper.entityToDto(personalDetails);
-        }
-
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found");
+        return mapper.entityToDto(persons);
     }
 }
