@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.entity;
 
-import com.jedisebas.restapi.Constants;
+import com.jedisebas.restapi.constants.DataStoreConstants;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -29,10 +29,10 @@ public class PersonalDetails {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = Constants.FIRST_NAME)
+    @Column(name = DataStoreConstants.FIRST_NAME)
     private String firstName;
 
-    @Column(name = Constants.LAST_NAME)
+    @Column(name = DataStoreConstants.LAST_NAME)
     private String lastName;
     private String address;
     private String email;
