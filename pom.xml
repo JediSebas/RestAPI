@@ -76,6 +76,7 @@
     </dependencies>
 
     <build>
+        <finalName>rest-api-0.0.1</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
