@@ -2,6 +2,7 @@
 
 --changeset JediSebas:1
 --comment: Creating table personal_details
+DROP TABLE IF EXISTS personal_details;
 CREATE TABLE personal_details(
 id INT PRIMARY KEY AUTO_INCREMENT,
 first_name VARCHAR(50),
