@@ -1,6 +1,5 @@
 package com.jedisebas.restapi.constants;
 
-import com.jedisebas.restapi.dto.AddressDto;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.Address;
 import com.jedisebas.restapi.entity.PersonalDetails;
@@ -22,8 +21,8 @@ public class TestDataProvider {
         return PersonalDetails.builder()
                 .firstName(PROPERLY_FIRST_NAME)
                 .lastName(PROPERLY_LAST_NAME)
-                .email(PROPERLY_EMAIL)
                 .address(createProperlyAddress())
+                .email(PROPERLY_EMAIL)
                 .build();
     }
 
@@ -32,8 +31,8 @@ public class TestDataProvider {
                 .id(1)
                 .firstName(PROPERLY_FIRST_NAME)
                 .lastName(PROPERLY_LAST_NAME)
-                .email(PROPERLY_EMAIL)
                 .address(createProperlyAddress())
+                .email(PROPERLY_EMAIL)
                 .build();
     }
 
@@ -42,20 +41,11 @@ public class TestDataProvider {
                 .firstName(PROPERLY_FIRST_NAME)
                 .lastName(PROPERLY_LAST_NAME)
                 .email(PROPERLY_EMAIL)
-                .addressDto(createProperlyAddressDto())
                 .build();
     }
 
     public static Address createProperlyAddress() {
         return Address.builder()
-                .city(PROPERLY_CITY)
-                .houseNumber(PROPERLY_HOUSE_NUMBER)
-                .street(PROPERLY_STREET)
-                .build();
-    }
-
-    public static AddressDto createProperlyAddressDto() {
-        return AddressDto.builder()
                 .city(PROPERLY_CITY)
                 .houseNumber(PROPERLY_HOUSE_NUMBER)
                 .street(PROPERLY_STREET)
