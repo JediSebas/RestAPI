@@ -59,7 +59,7 @@ public class AnonymizeService {
     }
 
     private static void throwWhenNullOrEmpty(String string) {
-        if (string == null || string.isEmpty()) {
+        if (string == null || string.trim().isEmpty()) {
             throw new IllegalArgumentException();
         }
     }

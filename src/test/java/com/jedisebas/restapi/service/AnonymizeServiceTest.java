@@ -36,6 +36,7 @@ class AnonymizeServiceTest {
         assertEquals("s***n@z***w.pl", AnonymizeService.anonymizeMiddleOfString("sebastian@zst-edu-ostrow.pl"));
         assertEquals("a***d@a***d.asd", AnonymizeService.anonymizeMiddleOfString("    asd@asd.asd "));
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeMiddleOfString(""));
+        assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeMiddleOfString(" "));
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeMiddleOfString(null));
     }
 }
