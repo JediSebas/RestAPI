@@ -4,16 +4,32 @@ import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.CreatedPersonResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.reset;
 
+@ExtendWith(MockitoExtension.class)
 class PersonalDetailsMapperTest {
+
+    @Mock
+    private AddressMapper addressMapper;
+
+    @InjectMocks
+    private PersonalDetailsMapper mapper;
+
+    @Before
+    void setUp() {
+        reset(addressMapper);
+    }
 
     @Test
     void givenDto_whenMapping_thenReturnEntity() {
-        PersonalDetailsMapper mapper = new PersonalDetailsMapper();
-
         PersonalDetailsDto dto = TestDataProvider.createProperlyPersonalDetailsDto();
 
         PersonalDetails entity = mapper.dtoToEntity(dto);
@@ -25,8 +41,6 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenEntity_whenMapping_thenReturnDto() {
-        PersonalDetailsMapper mapper = new PersonalDetailsMapper();
-
         PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
 
         PersonalDetailsDto dto = mapper.entityToDto(entity);
@@ -38,8 +52,6 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenEntity_whenAnonymizedMapping_thenReturnDto() {
-        PersonalDetailsMapper mapper = new PersonalDetailsMapper();
-
         PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
 
         PersonalDetailsDto dto = mapper.entityToDtoAnonymized(entity);
@@ -51,8 +63,6 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenEntity_whenMapping_thenReturnResponse() {
-        PersonalDetailsMapper mapper = new PersonalDetailsMapper();
-
         PersonalDetails entity = TestDataProvider.createProperlyPersonalDetailsWithId();
 
         CreatedPersonResponse response = mapper.entityToResponse(entity);
