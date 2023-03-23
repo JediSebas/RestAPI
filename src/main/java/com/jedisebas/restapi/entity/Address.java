@@ -10,29 +10,27 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Entity
-@Table(name = "personal_details")
+@Table(name = "address")
 @Getter
 @Setter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonalDetails {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = DataStoreConstants.FIRST_NAME)
-    private String firstName;
+    private String street;
 
-    @Column(name = DataStoreConstants.LAST_NAME)
-    private String lastName;
+    @Column(name = DataStoreConstants.HOUSE_NUMBER)
+    private String houseNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = DataStoreConstants.ADDRESS_ID, referencedColumnName = "id")
-    private Address address;
+    private String city;
 
-    private String email;
+    @OneToOne(mappedBy = "address")
+    private PersonalDetails personalDetails;
 }
