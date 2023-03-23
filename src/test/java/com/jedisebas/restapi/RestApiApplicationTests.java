@@ -61,6 +61,6 @@ class RestApiApplicationTests {
 
 		PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
 
-		assertEquals(personalDetailsDto.getAddress(), testIfWorks.getAddress());
+		assertEquals(personalDetailsDto.getEmail(), testIfWorks.getEmail());
 	}
 }

@@ -20,7 +20,6 @@ class PersonalDetailsMapperTest {
 
         assertEquals(dto.getFirstName(), entity.getFirstName());
         assertEquals(dto.getLastName(), entity.getLastName());
-        assertEquals(dto.getAddress(), entity.getAddress());
         assertEquals(dto.getEmail(), entity.getEmail());
     }
 
@@ -34,7 +33,6 @@ class PersonalDetailsMapperTest {
 
         assertEquals(entity.getFirstName(), dto.getFirstName());
         assertEquals(entity.getLastName(), dto.getLastName());
-        assertEquals(entity.getAddress(), dto.getAddress());
         assertEquals(entity.getEmail(), dto.getEmail());
     }
 
@@ -48,7 +46,6 @@ class PersonalDetailsMapperTest {
 
         assertEquals("Szymon", dto.getFirstName());
         assertEquals("M********", dto.getLastName());
-        assertEquals("Kalisz", dto.getAddress());
         assertEquals("s***k@g***l.com", dto.getEmail());
     }
 
