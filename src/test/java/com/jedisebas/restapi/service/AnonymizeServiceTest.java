@@ -17,14 +17,8 @@ class AnonymizeServiceTest {
         assertEquals("A***", AnonymizeService.anonymizeAllWithoutFirstLetter("   Adam    "));
 
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeAllWithoutFirstLetter(""));
-        assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeAllWithoutFirstLetter(null));
-
-        // missing scenario:
-        // org.opentest4j.AssertionFailedError: Unexpected exception type thrown,
-        //Expected :class java.lang.IllegalArgumentException
-        //Actual   :class java.lang.StringIndexOutOfBoundsException
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeAllWithoutFirstLetter(" "));
-
+        assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeAllWithoutFirstLetter(null));
     }
 
     @Test
@@ -35,6 +29,7 @@ class AnonymizeServiceTest {
         assertEquals("s***n@z***t.e***u.pl", AnonymizeService.anonymizeMiddleOfString("sebastian@zst.edu.pl"));
         assertEquals("s***n@z***w.pl", AnonymizeService.anonymizeMiddleOfString("sebastian@zst-edu-ostrow.pl"));
         assertEquals("a***d@a***d.asd", AnonymizeService.anonymizeMiddleOfString("    asd@asd.asd "));
+
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeMiddleOfString(""));
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeMiddleOfString(" "));
         assertThrows(IllegalArgumentException.class, () -> AnonymizeService.anonymizeMiddleOfString(null));
