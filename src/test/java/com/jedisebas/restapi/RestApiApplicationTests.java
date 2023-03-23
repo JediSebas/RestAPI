@@ -45,7 +45,6 @@ class RestApiApplicationTests {
 				{
 				    "first_name": "Szymon",
 				    "last_name": "Marciniak",
-				    "address": "Kalisz",
 				    "email": "szymonmarciniak22@gmail.com"
 				}
 				""";
