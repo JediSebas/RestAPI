@@ -30,7 +30,7 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenDto_whenMapping_thenReturnEntity() {
-        PersonalDetailsDto dto = TestDataProvider.createProperlyPersonalDetailsDto();
+        PersonalDetailsDto dto = TestDataProvider.createValidPersonalDetailsDto();
 
         PersonalDetails entity = mapper.dtoToEntity(dto);
 
@@ -41,7 +41,7 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenEntity_whenMapping_thenReturnDto() {
-        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
+        PersonalDetails entity = TestDataProvider.createValidPersonalDetails();
 
         PersonalDetailsDto dto = mapper.entityToDto(entity);
 
@@ -52,7 +52,7 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenEntity_whenAnonymizedMapping_thenReturnDto() {
-        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetails();
+        PersonalDetails entity = TestDataProvider.createValidPersonalDetails();
 
         PersonalDetailsDto dto = mapper.entityToDtoAnonymized(entity);
 
@@ -63,7 +63,7 @@ class PersonalDetailsMapperTest {
 
     @Test
     void givenEntity_whenMapping_thenReturnResponse() {
-        PersonalDetails entity = TestDataProvider.createProperlyPersonalDetailsWithId();
+        PersonalDetails entity = TestDataProvider.createValidPersonalDetailsWithId();
 
         CreatedPersonResponse response = mapper.entityToResponse(entity);
 

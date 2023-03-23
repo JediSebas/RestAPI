@@ -57,7 +57,7 @@ class RestApiApplicationTests {
 
 	@Test
 	void personalDetailsCreate() throws Exception {
-		PersonalDetailsDto personalDetailsDto = TestDataProvider.createProperlyPersonalDetailsDto();
+		PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
 		String ownJson = """
 				{
 				    "first_name": "Szymon",
