@@ -42,7 +42,7 @@ public class TestDataProvider {
                 .firstName(PROPERLY_FIRST_NAME)
                 .lastName(PROPERLY_LAST_NAME)
                 .email(PROPERLY_EMAIL)
-                .addressDto(createProperlyAddressDto())
+                .address(createProperlyAddressDto())
                 .build();
     }
 

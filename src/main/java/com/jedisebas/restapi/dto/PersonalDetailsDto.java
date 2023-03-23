@@ -21,7 +21,5 @@ public class PersonalDetailsDto {
     @JsonProperty(DataTransferConstants.LAST_NAME)
     private String lastName;
     private String email;
-
-    @JsonProperty(DataTransferConstants.ADDRESS)
-    private AddressDto addressDto;
+    private AddressDto address;
 }

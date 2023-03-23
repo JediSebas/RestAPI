@@ -18,7 +18,7 @@ public class PersonalDetailsMapper {
                 .firstName(personalDto.getFirstName())
                 .lastName(personalDto.getLastName())
                 .email(personalDto.getEmail())
-                .address(mapper.dtoToEntity(personalDto.getAddressDto()))
+                .address(mapper.dtoToEntity(personalDto.getAddress()))
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class PersonalDetailsMapper {
                 .firstName(personalDetails.getFirstName())
                 .lastName(personalDetails.getLastName())
                 .email(personalDetails.getEmail())
-                .addressDto(mapper.entityToDto(personalDetails.getAddress()))
+                .address(mapper.entityToDto(personalDetails.getAddress()))
                 .build();
     }
 
@@ -36,7 +36,7 @@ public class PersonalDetailsMapper {
                 .firstName(personalDetails.getFirstName())
                 .lastName(AnonymizeService.anonymizeAllWithoutFirstLetter(personalDetails.getLastName()))
                 .email(AnonymizeService.anonymizeMiddleOfString(personalDetails.getEmail()))
-                .addressDto(mapper.entityToDtoAnonymized(personalDetails.getAddress()))
+                .address(mapper.entityToDtoAnonymized(personalDetails.getAddress()))
                 .build();
     }
 
