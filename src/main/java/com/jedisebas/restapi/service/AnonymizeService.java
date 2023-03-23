@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AnonymizeService {
 
-    public static String anonymizeLastName(String lastName) {
+    public static String anonymizeAllWithoutFirstLetter(String lastName) {
         throwWhenNullOrEmpty(lastName);
 
         lastName = lastName.trim();
@@ -14,7 +14,7 @@ public class AnonymizeService {
         return lastName.charAt(0) + "*".repeat(lastName.length() - 1);
     }
 
-    public static String anonymizeEmail(String email) {
+    public static String anonymizeMiddleOfString(String email) {
         throwWhenNullOrEmpty(email);
 
         email = email.trim();
@@ -50,7 +50,7 @@ public class AnonymizeService {
         return emailBuilder.toString();
     }
 
-    public static String anonymizeHouseNumber(String houseNumber) {
+    public static String anonymizeEntireString(String houseNumber) {
         throwWhenNullOrEmpty(houseNumber);
 
         houseNumber = houseNumber.trim();

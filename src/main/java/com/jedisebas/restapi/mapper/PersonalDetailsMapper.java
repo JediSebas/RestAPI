@@ -34,8 +34,8 @@ public class PersonalDetailsMapper {
     public PersonalDetailsDto entityToDtoAnonymized(PersonalDetails personalDetails) {
         return PersonalDetailsDto.builder()
                 .firstName(personalDetails.getFirstName())
-                .lastName(AnonymizeService.anonymizeLastName(personalDetails.getLastName()))
-                .email(AnonymizeService.anonymizeEmail(personalDetails.getEmail()))
+                .lastName(AnonymizeService.anonymizeAllWithoutFirstLetter(personalDetails.getLastName()))
+                .email(AnonymizeService.anonymizeMiddleOfString(personalDetails.getEmail()))
                 .addressDto(mapper.entityToDtoAnonymized(personalDetails.getAddress()))
                 .build();
     }

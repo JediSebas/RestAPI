@@ -26,9 +26,9 @@ public class AddressMapper {
 
     public AddressDto entityToDtoAnonymized(Address address) {
         return AddressDto.builder()
-                .city(AnonymizeService.anonymizeEmail(address.getCity()))
-                .houseNumber(AnonymizeService.anonymizeHouseNumber(address.getHouseNumber()))
-                .street(AnonymizeService.anonymizeEmail(address.getStreet()))
+                .city(AnonymizeService.anonymizeMiddleOfString(address.getCity()))
+                .houseNumber(AnonymizeService.anonymizeEntireString(address.getHouseNumber()))
+                .street(AnonymizeService.anonymizeMiddleOfString(address.getStreet()))
                 .build();
     }
 }
