@@ -1,7 +1,5 @@
 package com.jedisebas.restapi;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
@@ -49,7 +47,7 @@ class RestApiApplicationTests {
 				    "address": {
 				        "city": "Gdansk",
 				        "street": "Jana z Kolna",
-				        "house_number": "11" 
+				        "house_number": "11"
 				    }
 				}
 				""";
