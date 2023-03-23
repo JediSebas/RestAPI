@@ -40,7 +40,6 @@ public class TestDataProvider {
         return PersonalDetailsDto.builder()
                 .firstName(PROPERLY_FIRST_NAME)
                 .lastName(PROPERLY_LAST_NAME)
-                .address(PROPERLY_ADDRESS)
                 .email(PROPERLY_EMAIL)
                 .build();
     }
