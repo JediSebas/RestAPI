@@ -4,16 +4,21 @@ import com.jedisebas.restapi.dto.CreatedPersonResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.service.AnonymizeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PersonalDetailsMapper {
+
+    @Autowired
+    private AddressMapper mapper;
 
     public PersonalDetails dtoToEntity(PersonalDetailsDto personalDto) {
         return PersonalDetails.builder()
                 .firstName(personalDto.getFirstName())
                 .lastName(personalDto.getLastName())
                 .email(personalDto.getEmail())
+                .address(mapper.dtoToEntity(personalDto.getAddressDto()))
                 .build();
     }
 
@@ -22,6 +27,7 @@ public class PersonalDetailsMapper {
                 .firstName(personalDetails.getFirstName())
                 .lastName(personalDetails.getLastName())
                 .email(personalDetails.getEmail())
+                .addressDto(mapper.entityToDto(personalDetails.getAddress()))
                 .build();
     }
 
@@ -30,6 +36,7 @@ public class PersonalDetailsMapper {
                 .firstName(personalDetails.getFirstName())
                 .lastName(AnonymizeService.anonymizeLastName(personalDetails.getLastName()))
                 .email(AnonymizeService.anonymizeEmail(personalDetails.getEmail()))
+                .addressDto(mapper.entityToDtoAnonymized(personalDetails.getAddress()))
                 .build();
     }
 
