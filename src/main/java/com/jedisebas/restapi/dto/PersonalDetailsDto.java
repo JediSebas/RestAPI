@@ -20,6 +20,5 @@ public class PersonalDetailsDto {
 
     @JsonProperty(DataTransferConstants.LAST_NAME)
     private String lastName;
-    private String address;
     private String email;
 }
