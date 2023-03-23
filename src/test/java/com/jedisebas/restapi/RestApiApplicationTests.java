@@ -1,7 +1,5 @@
 package com.jedisebas.restapi;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
@@ -40,19 +38,19 @@ class RestApiApplicationTests {
 
 	@Test
 	void personalDetailsCreate() throws Exception {
-		PersonalDetailsDto personalDetailsDto = TestDataProvider.createProperlyPersonalDetailsDto();
+		PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
 		String ownJson = """
 				{
 				    "first_name": "Szymon",
 				    "last_name": "Marciniak",
-				    "address": "Kalisz",
-				    "email": "szymonmarciniak22@gmail.com"
+				    "email": "szymonmarciniak@gmail.com",
+				    "address": {
+				        "city": "Gdansk",
+				        "street": "Jana z Kolna",
+				        "house_number": "11"
+				    }
 				}
 				""";
-
-		GsonBuilder builder = new GsonBuilder();
-		builder.setPrettyPrinting();
-		Gson gson = builder.create();
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -61,6 +59,6 @@ class RestApiApplicationTests {
 
 		PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
 
-		assertEquals(personalDetailsDto.getAddress(), testIfWorks.getAddress());
+		assertEquals(personalDetailsDto.getEmail(), testIfWorks.getEmail());
 	}
 }

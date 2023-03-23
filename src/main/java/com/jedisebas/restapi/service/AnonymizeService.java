@@ -6,48 +6,60 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AnonymizeService {
 
-    public static String anonymizeLastName(String lastName) {
-        throwWhenNullOrEmpty(lastName);
+    public static String anonymizeAllWithoutFirstLetter(String string) {
+        throwWhenNullOrEmpty(string);
 
-        lastName = lastName.trim();
+        string = string.trim();
 
-        return lastName.charAt(0) + "*".repeat(lastName.length() - 1);
+        return string.charAt(0) + "*".repeat(string.length() - 1);
     }
 
-    public static String anonymizeEmail(String email) {
-        throwWhenNullOrEmpty(email);
+    public static String anonymizeMiddleOfString(String string) {
+        throwWhenNullOrEmpty(string);
 
-        email = email.trim();
+        string = string.trim();
 
-        final String[] splitEmail = email.split("@");
+        final String[] splitString = string.split("@");
 
-        final String local = splitEmail[0];
-        final String domain = splitEmail[1];
+        final String local = splitString[0];
 
-        final StringBuilder emailBuilder = new StringBuilder();
-        emailBuilder.append(local.charAt(0));
-        emailBuilder.append("***");
-        emailBuilder.append(local.charAt(local.length() - 1));
-        emailBuilder.append("@");
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(local.charAt(0));
+        stringBuilder.append("***");
+        stringBuilder.append(local.charAt(local.length() - 1));
 
+        if (splitString.length == 1) {
+            return stringBuilder.toString();
+        }
+
+        stringBuilder.append("@");
+        final String domain = splitString[1];
         final String[] splitDomain = domain.split("\\.");
 
         final String lastPart = splitDomain[splitDomain.length - 1];
 
         for (int i = 0; i < splitDomain.length - 1; i++) {
             final String part = splitDomain[i];
-            emailBuilder.append(part.charAt(0));
-            emailBuilder.append("***");
-            emailBuilder.append(part.charAt(part.length() - 1));
-            emailBuilder.append(".");
+            stringBuilder.append(part.charAt(0));
+            stringBuilder.append("***");
+            stringBuilder.append(part.charAt(part.length() - 1));
+            stringBuilder.append(".");
         }
-        emailBuilder.append(lastPart);
+        stringBuilder.append(lastPart);
 
-        return emailBuilder.toString();
+        return stringBuilder.toString();
+    }
+
+    public static String anonymizeEntireString(String string) {
+        throwWhenNullOrEmpty(string);
+
+        string = string.trim();
+
+        return "*".repeat(string.length());
     }
 
     private static void throwWhenNullOrEmpty(String string) {
-        if (string == null || string.isEmpty()) {
+        if (string == null || string.trim().isEmpty()) {
             throw new IllegalArgumentException();
         }
     }

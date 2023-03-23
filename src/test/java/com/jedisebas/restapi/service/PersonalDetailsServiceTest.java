@@ -40,7 +40,7 @@ class PersonalDetailsServiceTest {
 
     @Test
     void createPersonalDetailsSuccessful() {
-        PersonalDetailsDto requestBody = TestDataProvider.createProperlyPersonalDetailsDto();
+        PersonalDetailsDto requestBody = TestDataProvider.createValidPersonalDetailsDto();
         PersonalDetails expectedEntityToSave = new PersonalDetails();
         PersonalDetails savedEntity = new PersonalDetails();
         CreatedPersonResponse response = new CreatedPersonResponse(ID);

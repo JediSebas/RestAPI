@@ -13,13 +13,12 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonalDetailsDto {
+public class AddressDto {
 
-    @JsonProperty(DataTransferConstants.FIRST_NAME)
-    private String firstName;
+    private String street;
 
-    @JsonProperty(DataTransferConstants.LAST_NAME)
-    private String lastName;
-    private String email;
-    private AddressDto address;
+    @JsonProperty(DataTransferConstants.HOUSE_NUMBER)
+    private String houseNumber;
+
+    private String city;
 }
