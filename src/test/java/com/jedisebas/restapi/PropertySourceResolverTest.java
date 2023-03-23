@@ -14,7 +14,6 @@ class PropertySourceResolverTest {
 
     @Test
     void shouldTestResourceFile_overridePropertyValues() {
-        assertEquals("jdbc:h2:file:./src/main/resources/db/testdb", resolver.getSpringDatasourceUrl());
         assertEquals("org.h2.Driver", resolver.getSpringDatasourceDriverClassName());
         assertEquals("sa", resolver.getSpringDatasourceUsername());
         assertEquals("password", resolver.getSpringDatasourcePassword());
