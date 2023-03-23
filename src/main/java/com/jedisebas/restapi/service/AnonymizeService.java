@@ -22,14 +22,18 @@ public class AnonymizeService {
         final String[] splitEmail = email.split("@");
 
         final String local = splitEmail[0];
-        final String domain = splitEmail[1];
 
         final StringBuilder emailBuilder = new StringBuilder();
         emailBuilder.append(local.charAt(0));
         emailBuilder.append("***");
         emailBuilder.append(local.charAt(local.length() - 1));
-        emailBuilder.append("@");
 
+        if (splitEmail.length == 1) {
+            return emailBuilder.toString();
+        }
+
+        emailBuilder.append("@");
+        final String domain = splitEmail[1];
         final String[] splitDomain = domain.split("\\.");
 
         final String lastPart = splitDomain[splitDomain.length - 1];
@@ -44,6 +48,14 @@ public class AnonymizeService {
         emailBuilder.append(lastPart);
 
         return emailBuilder.toString();
+    }
+
+    public static String anonymizeHouseNumber(String houseNumber) {
+        throwWhenNullOrEmpty(houseNumber);
+
+        houseNumber = houseNumber.trim();
+
+        return "*".repeat(houseNumber.length());
     }
 
     private static void throwWhenNullOrEmpty(String string) {
