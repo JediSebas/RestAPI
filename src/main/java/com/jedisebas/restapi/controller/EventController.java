@@ -4,6 +4,7 @@ import com.jedisebas.restapi.dto.CreatedEventResponse;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class EventController {
     private EventService service;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public CreatedEventResponse createEvent(@RequestBody EventDto eventDto) {
         return service.createEvent(eventDto);
     }
