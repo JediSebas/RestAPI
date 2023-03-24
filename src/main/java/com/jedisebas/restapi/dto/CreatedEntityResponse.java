@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreatedEventResponse {
+public class CreatedEntityResponse {
 
     private int id;
 }

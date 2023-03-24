@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.mapper;
 
-import com.jedisebas.restapi.dto.CreatedPersonResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.service.AnonymizeService;
@@ -40,7 +40,7 @@ public class PersonalDetailsMapper {
                 .build();
     }
 
-    public CreatedPersonResponse entityToResponse(PersonalDetails savedEntity) {
-        return new CreatedPersonResponse(savedEntity.getId());
+    public CreatedEntityResponse entityToResponse(PersonalDetails savedEntity) {
+        return new CreatedEntityResponse(savedEntity.getId());
     }
 }

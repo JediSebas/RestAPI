@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.controller;
 
-import com.jedisebas.restapi.dto.CreatedPersonResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.service.PersonalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class PersonalDetailsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedPersonResponse addPersonDetails(@RequestBody final PersonalDetailsDto personalDto) {
+    public CreatedEntityResponse addPersonDetails(@RequestBody final PersonalDetailsDto personalDto) {
         return service.createPersonalDetails(personalDto);
     }
 

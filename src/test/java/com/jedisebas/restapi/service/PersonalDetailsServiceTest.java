@@ -1,7 +1,7 @@
 package com.jedisebas.restapi.service;
 
 import com.jedisebas.restapi.constants.TestDataProvider;
-import com.jedisebas.restapi.dto.CreatedPersonResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
@@ -43,13 +43,13 @@ class PersonalDetailsServiceTest {
         PersonalDetailsDto requestBody = TestDataProvider.createValidPersonalDetailsDto();
         PersonalDetails expectedEntityToSave = new PersonalDetails();
         PersonalDetails savedEntity = new PersonalDetails();
-        CreatedPersonResponse response = new CreatedPersonResponse(ID);
+        CreatedEntityResponse response = new CreatedEntityResponse(ID);
 
         when(mapper.dtoToEntity(requestBody)).thenReturn(expectedEntityToSave);
         when(repository.save(expectedEntityToSave)).thenReturn(savedEntity);
         when(mapper.entityToResponse(savedEntity)).thenReturn(response);
 
-        CreatedPersonResponse actualResponse =  service.createPersonalDetails(requestBody);
+        CreatedEntityResponse actualResponse =  service.createPersonalDetails(requestBody);
 
         assertEquals(actualResponse, response);
         verify(mapper, never()).entityToResponse(expectedEntityToSave);

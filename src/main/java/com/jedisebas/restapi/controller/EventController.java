@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.controller;
 
-import com.jedisebas.restapi.dto.CreatedEventResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class EventController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedEventResponse createEvent(@RequestBody EventDto eventDto) {
+    public CreatedEntityResponse createEvent(@RequestBody EventDto eventDto) {
         return service.createEvent(eventDto);
     }
 

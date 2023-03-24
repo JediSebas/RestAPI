@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.service;
 
-import com.jedisebas.restapi.dto.CreatedEventResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.entity.Event;
 import com.jedisebas.restapi.mapper.EventMapper;
@@ -20,7 +20,7 @@ public class EventService {
     private final EventRepository repository;
     private final EventMapper mapper;
 
-    public CreatedEventResponse createEvent(final EventDto eventDto) {
+    public CreatedEntityResponse createEvent(final EventDto eventDto) {
         ValidatorService validator = new ValidatorService();
         validator.validateEventDtoFields(eventDto);
 

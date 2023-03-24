@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.service;
 
-import com.jedisebas.restapi.dto.CreatedPersonResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
@@ -20,7 +20,7 @@ public class PersonalDetailsService {
     private final PersonalDetailsRepository repository;
     private final PersonalDetailsMapper mapper;
 
-    public CreatedPersonResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
+    public CreatedEntityResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
         ValidatorService validator = new ValidatorService();
         validator.validatePersonalDetailsDtoFields(personalDto);
 

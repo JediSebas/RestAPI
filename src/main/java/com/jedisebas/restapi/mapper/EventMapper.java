@@ -1,6 +1,6 @@
 package com.jedisebas.restapi.mapper;
 
-import com.jedisebas.restapi.dto.CreatedEventResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.entity.Event;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class EventMapper {
                 .build();
     }
 
-    public CreatedEventResponse entityToResponse(Event savedEvent) {
-        return new CreatedEventResponse(savedEvent.getId());
+    public CreatedEntityResponse entityToResponse(Event savedEvent) {
+        return new CreatedEntityResponse(savedEvent.getId());
     }
 }
