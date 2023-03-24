@@ -11,12 +11,16 @@ import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "personal_details")
@@ -44,4 +48,11 @@ public class PersonalDetails {
     private Address address;
 
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "person_to_event",
+            joinColumns = @JoinColumn(name = DataStoreConstants.PERSON_ID),
+            inverseJoinColumns = @JoinColumn(name = DataStoreConstants.EVENT_ID))
+    private Set<Event> registeredEvents;
 }

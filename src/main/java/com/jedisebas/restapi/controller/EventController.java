@@ -1,8 +1,8 @@
 package com.jedisebas.restapi.controller;
 
 import com.jedisebas.restapi.dto.CreatedEntityResponse;
-import com.jedisebas.restapi.dto.PersonalDetailsDto;
-import com.jedisebas.restapi.service.PersonalDetailsService;
+import com.jedisebas.restapi.dto.EventDto;
+import com.jedisebas.restapi.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,27 +17,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/persons",
+@RequestMapping(path = "/v1/events",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
-public class PersonalDetailsController {
+public class EventController {
 
     @Autowired
-    private PersonalDetailsService service;
+    private EventService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedEntityResponse addPersonDetails(@RequestBody final PersonalDetailsDto personalDto) {
-        return service.createPersonalDetails(personalDto);
+    public CreatedEntityResponse createEvent(@RequestBody EventDto eventDto) {
+        return service.createEvent(eventDto);
     }
 
     @GetMapping
-    public List<PersonalDetailsDto> getAll() {
-        return service.fetchAllPersonalDetails();
+    public List<EventDto> getAll() {
+        return service.fetchAllEvents();
     }
 
     @GetMapping("/{id}")
-    public PersonalDetailsDto getById(@PathVariable int id) {
-        return service.fetchPersonalDetails(id);
+    public EventDto getById(@PathVariable final int id) {
+        return service.fetchEvent(id);
     }
 }

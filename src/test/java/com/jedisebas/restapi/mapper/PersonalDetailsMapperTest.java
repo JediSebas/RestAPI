@@ -1,7 +1,7 @@
 package com.jedisebas.restapi.mapper;
 
 import com.jedisebas.restapi.constants.TestDataProvider;
-import com.jedisebas.restapi.dto.CreatedPersonResponse;
+import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import org.junit.Before;
@@ -65,7 +65,7 @@ class PersonalDetailsMapperTest {
     void givenEntity_whenMapping_thenReturnResponse() {
         PersonalDetails entity = TestDataProvider.createValidPersonalDetailsWithId();
 
-        CreatedPersonResponse response = mapper.entityToResponse(entity);
+        CreatedEntityResponse response = mapper.entityToResponse(entity);
 
         assertEquals(entity.getId(), response.getId());
     }
