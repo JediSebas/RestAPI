@@ -52,7 +52,7 @@ public class PersonalDetails {
     @ManyToMany
     @JoinTable(
             name = "person_to_event",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id"))
+            joinColumns = @JoinColumn(name = DataStoreConstants.PERSON_ID),
+            inverseJoinColumns = @JoinColumn(name = DataStoreConstants.EVENT_ID))
     private Set<Event> registeredEvents;
 }
