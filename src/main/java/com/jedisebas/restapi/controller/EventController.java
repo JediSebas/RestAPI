@@ -5,10 +5,9 @@ import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/v1/events",
@@ -22,5 +21,15 @@ public class EventController {
     @PostMapping
     public CreatedEventResponse createEvent(@RequestBody EventDto eventDto) {
         return service.createEvent(eventDto);
+    }
+
+    @GetMapping
+    public List<EventDto> getAll() {
+        return service.fetchAllEvents();
+    }
+
+    @GetMapping("/{id}")
+    public EventDto getById(@PathVariable final int id) {
+        return service.fetchEvent(id);
     }
 }
