@@ -6,12 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.ManyToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -29,6 +32,11 @@ public class Event {
     private Integer id;
 
     private String title;
+
     private String date;
+
     private String description;
+
+    @ManyToMany(mappedBy = "registeredEvents")
+    private Set<PersonalDetails> persons;
 }
