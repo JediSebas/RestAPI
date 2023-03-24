@@ -11,11 +11,11 @@ description VARCHAR(280)
 
 --changeset JedSebas:10
 --comment: Creating relation many-to-many
-CREATE TABLE IF NOT EXISTS persons_to_event(
+CREATE TABLE IF NOT EXISTS person_to_event(
 id INT PRIMARY KEY AUTO_INCREMENT,
-persons_id INT,
+person_id INT,
 event_id INT,
-FOREIGN KEY (persons_id) REFERENCES personal_details(id),
+FOREIGN KEY (person_id) REFERENCES personal_details(id),
 FOREIGN KEY (event_id) REFERENCES event(id)
 );
 
