@@ -2,26 +2,26 @@ package com.jedisebas.restapi;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.Assert.assertEquals;
 
-@AutoConfigureMockMvc
 public class StepsDef {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    private MvcResult mvcResult;
+    private Response response;
 
     @When("a POST request is sent to {string}")
-    public void a_post_request_is_sent_to(String url) throws Exception {
-        String ownJson = """
+    public void aPostRequestIsSentTo(String url) {
+        RestAssured.basePath = "http://localhost:8080/";
+        RequestSpecification request = RestAssured.given();
+
+        request.header("Content-Type", MediaType.APPLICATION_JSON);
+
+        String json = """
+                
                 {
                     "title": "Tech3camp",
                     "date": "2023-03-23 17:35:00",
@@ -29,14 +29,13 @@ public class StepsDef {
                 }
                 """;
 
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(url)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(ownJson))
-                .andReturn();
+        response = request
+                .body(json)
+                .post(url);
     }
     
     @Then("the response status code should be {int} CREATED")
-    public void the_response_status_code_should_be_created(Integer code) {
-        assertEquals(code, (Integer) mvcResult.getResponse().getStatus());
+    public void theResponseStatusCodeShouldBeCreated(int code) {
+        assertEquals(code, response.getStatusCode());
     }
 }
