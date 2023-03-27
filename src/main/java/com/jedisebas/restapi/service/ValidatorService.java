@@ -4,9 +4,11 @@ import com.jedisebas.restapi.dto.AddressDto;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.regex.Pattern;
 
+@Service
 @NoArgsConstructor
 public class ValidatorService {
 

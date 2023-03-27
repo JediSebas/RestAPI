@@ -30,6 +30,9 @@ class PersonalDetailsServiceTest {
     @Mock
     private PersonalDetailsRepository repository;
 
+    @Mock
+    private ValidatorService validator;
+
     @InjectMocks
     private PersonalDetailsService service;
 
