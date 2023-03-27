@@ -46,6 +46,42 @@ public class TestDataProvider {
                 .build();
     }
 
+    public static PersonalDetailsDto createOneSpaceFieldsPersonalDetailsDto() {
+        return PersonalDetailsDto.builder()
+                .firstName(" ")
+                .lastName(" ")
+                .email(" ")
+                .address(createOneSpaceFieldsAddressDto())
+                .build();
+    }
+
+    public static PersonalDetailsDto createEmptyFieldsPersonalDetailsDto() {
+        return PersonalDetailsDto.builder()
+                .firstName("")
+                .lastName("")
+                .email("")
+                .address(createEmptyFieldsAddressDto())
+                .build();
+    }
+
+    public static PersonalDetailsDto createNullFieldsPersonalDetailsDto() {
+        return PersonalDetailsDto.builder()
+                .firstName(null)
+                .lastName(null)
+                .email(null)
+                .address(null)
+                .build();
+    }
+
+    public static PersonalDetailsDto createNullAddressFieldsPersonalDetailsDto() {
+        return PersonalDetailsDto.builder()
+                .firstName(VALID_FIRST_NAME)
+                .lastName(VALID_LAST_NAME)
+                .email(VALID_EMAIL)
+                .address(createNullFieldsAddressDto())
+                .build();
+    }
+
     public static Address createValidAddress() {
         return Address.builder()
                 .city(VALID_CITY)
@@ -59,6 +95,30 @@ public class TestDataProvider {
                 .city(VALID_CITY)
                 .houseNumber(VALID_HOUSE_NUMBER)
                 .street(VALID_STREET)
+                .build();
+    }
+
+    public static AddressDto createOneSpaceFieldsAddressDto() {
+        return AddressDto.builder()
+                .city(" ")
+                .houseNumber(" ")
+                .street(" ")
+                .build();
+    }
+
+    public static AddressDto createEmptyFieldsAddressDto() {
+        return AddressDto.builder()
+                .city("")
+                .houseNumber("")
+                .street("")
+                .build();
+    }
+
+    public static AddressDto createNullFieldsAddressDto() {
+        return AddressDto.builder()
+                .city(null)
+                .houseNumber(null)
+                .street(null)
                 .build();
     }
 }
