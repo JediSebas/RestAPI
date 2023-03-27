@@ -1,6 +1,7 @@
 package com.jedisebas.restapi.constants;
 
 import com.jedisebas.restapi.dto.AddressDto;
+import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.Address;
 import com.jedisebas.restapi.entity.PersonalDetails;
@@ -17,6 +18,10 @@ public class TestDataProvider {
     private static final String VALID_CITY = "Kalisz";
     private static final String VALID_STREET = "ostrowska";
     private static final String VALID_HOUSE_NUMBER = "22";
+
+    private static final String VALID_TITLE = "Tech3camp";
+    private static final String VALID_DATE = "2023-03-23 17:35:00";
+    private static final String VALID_DESCRIPTION = "Lorem ipsum dolor sit amet";
 
     private static final String TOO_LONG_FIRST_NAME = "Name" + "e".repeat(47);
     private static final String TOO_LONG_LAST_NAME = "Surname" + "e".repeat(44);
@@ -141,6 +146,38 @@ public class TestDataProvider {
                 .city(null)
                 .houseNumber(null)
                 .street(null)
+                .build();
+    }
+
+    public static EventDto createValidEventDto() {
+        return EventDto.builder()
+                .title(VALID_TITLE)
+                .date(VALID_DATE)
+                .description(VALID_DESCRIPTION)
+                .build();
+    }
+
+    public static EventDto createOneSpaceFieldsEventDto() {
+        return EventDto.builder()
+                .title(" ")
+                .date(" ")
+                .description(" ")
+                .build();
+    }
+
+    public static EventDto createEmptyFieldsEventDto() {
+        return EventDto.builder()
+                .title("")
+                .date("")
+                .description("")
+                .build();
+    }
+
+    public static EventDto createNullFieldsEventDto() {
+        return EventDto.builder()
+                .title(null)
+                .date(null)
+                .description(null)
                 .build();
     }
 }
