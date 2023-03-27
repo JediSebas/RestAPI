@@ -13,3 +13,11 @@ Then go into
 And run with this command
 
 ``mvn spring-boot:run``
+
+## Run docker
+
+``./mvnw clean install``
+
+``docker build -t rest-api``
+
+``docker run -dp 8080:8080 rest-api``
