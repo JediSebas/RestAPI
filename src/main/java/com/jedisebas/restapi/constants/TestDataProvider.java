@@ -18,6 +18,10 @@ public class TestDataProvider {
     private static final String VALID_STREET = "ostrowska";
     private static final String VALID_HOUSE_NUMBER = "22";
 
+    private static final String TOO_LONG_FIRST_NAME = "Name" + "e".repeat(47);
+    private static final String TOO_LONG_LAST_NAME = "Surname" + "e".repeat(44);
+    private static final String TOO_LONG_EMAIL = "mail@email.com" + "m".repeat(37);
+
     public static PersonalDetails createValidPersonalDetails() {
         return PersonalDetails.builder()
                 .firstName(VALID_FIRST_NAME)
@@ -42,6 +46,24 @@ public class TestDataProvider {
                 .firstName(VALID_FIRST_NAME)
                 .lastName(VALID_LAST_NAME)
                 .email(VALID_EMAIL)
+                .address(createValidAddressDto())
+                .build();
+    }
+
+    public static PersonalDetailsDto createTooLongFieldsPersonalDetailsDto() {
+        return PersonalDetailsDto.builder()
+                .firstName(TOO_LONG_FIRST_NAME)
+                .lastName(TOO_LONG_LAST_NAME)
+                .email(TOO_LONG_EMAIL)
+                .address(createValidAddressDto())
+                .build();
+    }
+
+    public static PersonalDetailsDto createInvalidEmailPersonalDetailsDto() {
+        return PersonalDetailsDto.builder()
+                .firstName(VALID_FIRST_NAME)
+                .lastName(VALID_LAST_NAME)
+                .email("asd")
                 .address(createValidAddressDto())
                 .build();
     }

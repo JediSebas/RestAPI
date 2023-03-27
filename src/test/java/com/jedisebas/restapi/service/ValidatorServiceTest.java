@@ -13,20 +13,20 @@ class ValidatorServiceTest {
     void givenPersonalDetailsDto_whenValidate() {
         ValidatorService validator = new ValidatorService();
 
-        PersonalDetailsDto validDto = TestDataProvider.createValidPersonalDetailsDto();
-        PersonalDetailsDto tooLongFieldDto;
-        PersonalDetailsDto notValidEmailDto;
+        PersonalDetailsDto tooLongFieldsDto = TestDataProvider.createTooLongFieldsPersonalDetailsDto();
+        PersonalDetailsDto invalidEmailDto = TestDataProvider.createInvalidEmailPersonalDetailsDto();
         PersonalDetailsDto nullFieldsDto = TestDataProvider.createNullFieldsPersonalDetailsDto();
         PersonalDetailsDto emptyFieldsDto = TestDataProvider.createEmptyFieldsPersonalDetailsDto();
         PersonalDetailsDto oneSpaceFieldsDto = TestDataProvider.createOneSpaceFieldsPersonalDetailsDto();
         PersonalDetailsDto nullAddressFieldsDto = TestDataProvider.createNullAddressFieldsPersonalDetailsDto();
-        PersonalDetailsDto nullDto = null;
 
         assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(nullFieldsDto));
         assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(emptyFieldsDto));
         assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(oneSpaceFieldsDto));
         assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(nullAddressFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(nullDto));
+        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(null));
+        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(tooLongFieldsDto));
+        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(invalidEmailDto));
     }
 
 }
