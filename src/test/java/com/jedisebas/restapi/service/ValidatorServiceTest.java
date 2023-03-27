@@ -10,37 +10,32 @@ import static org.junit.Assert.assertThrows;
 
 class ValidatorServiceTest {
 
+    private final ValidatorService validator = new ValidatorService();
+
     @Test
     void givenPersonalDetailsDto_whenValidate_thenThrowsException() {
-        ValidatorService validator = new ValidatorService();
-
-        PersonalDetailsDto tooLongFieldsDto = createTooLongFieldsPersonalDetailsDto();
-        PersonalDetailsDto invalidEmailDto = createInvalidEmailPersonalDetailsDto();
-        PersonalDetailsDto nullFieldsDto = createNullFieldsPersonalDetailsDto();
-        PersonalDetailsDto emptyFieldsDto = createEmptyFieldsPersonalDetailsDto();
-        PersonalDetailsDto oneSpaceFieldsDto = createOneSpaceFieldsPersonalDetailsDto();
-        PersonalDetailsDto nullAddressFieldsDto = createNullAddressFieldsPersonalDetailsDto();
-
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(nullFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(emptyFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(oneSpaceFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(nullAddressFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(null));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(tooLongFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(invalidEmailDto));
+        assertThrowsIllegalArgumentException(createNullFieldsPersonalDetailsDto());
+        assertThrowsIllegalArgumentException(createTooLongFieldsPersonalDetailsDto());
+        assertThrowsIllegalArgumentException(createInvalidEmailPersonalDetailsDto());
+        assertThrowsIllegalArgumentException(createEmptyFieldsPersonalDetailsDto());
+        assertThrowsIllegalArgumentException(createOneSpaceFieldsPersonalDetailsDto());
+        assertThrowsIllegalArgumentException(createNullAddressFieldsPersonalDetailsDto());
+        assertThrowsIllegalArgumentException((PersonalDetailsDto) null);
     }
 
     @Test
     void givenEventDto_whenValidate_thenThrowsException() {
-        ValidatorService validator = new ValidatorService();
+        assertThrowsIllegalArgumentException(createNullFieldsEventDto());
+        assertThrowsIllegalArgumentException(createEmptyFieldsEventDto());
+        assertThrowsIllegalArgumentException(createOneSpaceFieldsEventDto());
+        assertThrowsIllegalArgumentException((EventDto) null);
+    }
 
-        EventDto nullFieldsDto = createNullFieldsEventDto();
-        EventDto emptyFieldsDto = createEmptyFieldsEventDto();
-        EventDto oneSpaceFieldsDto = createOneSpaceFieldsEventDto();
+    private void assertThrowsIllegalArgumentException(final PersonalDetailsDto dto) {
+        assertThrows(IllegalArgumentException.class, () -> validator.validatePersonalDetailsDtoFields(dto));
+    }
 
-        assertThrows(IllegalArgumentException.class, () -> validator.validateEventDtoFields(nullFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validateEventDtoFields(emptyFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validateEventDtoFields(oneSpaceFieldsDto));
-        assertThrows(IllegalArgumentException.class, () -> validator.validateEventDtoFields(null));
+    private void assertThrowsIllegalArgumentException(final EventDto dto) {
+        assertThrows(IllegalArgumentException.class, () -> validator.validateEventDtoFields(dto));
     }
 }
