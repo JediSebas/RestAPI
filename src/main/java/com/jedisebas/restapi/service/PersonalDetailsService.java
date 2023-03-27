@@ -19,9 +19,9 @@ public class PersonalDetailsService {
 
     private final PersonalDetailsRepository repository;
     private final PersonalDetailsMapper mapper;
+    private final ValidatorService validator;
 
     public CreatedEntityResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
-        ValidatorService validator = new ValidatorService();
         validator.validatePersonalDetailsDtoFields(personalDto);
 
         PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);

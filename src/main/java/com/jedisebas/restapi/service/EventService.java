@@ -19,9 +19,9 @@ public class EventService {
 
     private final EventRepository repository;
     private final EventMapper mapper;
+    private final ValidatorService validator;
 
     public CreatedEntityResponse createEvent(final EventDto eventDto) {
-        ValidatorService validator = new ValidatorService();
         validator.validateEventDtoFields(eventDto);
 
         Event event = mapper.dtoToEntity(eventDto);
