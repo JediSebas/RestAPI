@@ -1,27 +1,31 @@
 package com.jedisebas.restapi;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.Assert.assertEquals;
 
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+@Transactional
+@AllArgsConstructor
 public class StepsDef {
 
-    private Response response;
+    private final MockMvc mockMvc;
+    private MvcResult mvcResult;
 
-    @When("a POST request is sent to {string}")
-    public void aPostRequestIsSentTo(String url) {
-        RestAssured.basePath = "http://localhost:8080/";
-        RequestSpecification request = RestAssured.given();
-
-        request.header("Content-Type", MediaType.APPLICATION_JSON);
-
+    @Given("a POST request to {string}")
+    public void aPostRequestIsSentTo(String url) throws Exception {
         String json = """
-                
+
                 {
                     "title": "Tech3camp",
                     "date": "2023-03-23 17:35:00",
@@ -29,13 +33,14 @@ public class StepsDef {
                 }
                 """;
 
-        response = request
-                .body(json)
-                .post(url);
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(url)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andReturn();
     }
     
     @Then("the response status code should be {int} CREATED")
     public void theResponseStatusCodeShouldBeCreated(int code) {
-        assertEquals(code, response.getStatusCode());
+        assertEquals(code, mvcResult.getResponse().getStatus());
     }
 }
