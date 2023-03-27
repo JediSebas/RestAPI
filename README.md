@@ -18,6 +18,6 @@ And run with this command
 
 ``./mvnw clean install``
 
-``docker build -t rest-api``
+``docker build . -t rest-api``
 
 ``docker run -dp 8080:8080 rest-api``
