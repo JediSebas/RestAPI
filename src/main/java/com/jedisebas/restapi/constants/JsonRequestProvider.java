@@ -15,7 +15,7 @@ public final class JsonRequestProvider {
                 }
                 """;
 
-    public static final String EVENT_PERSONAL_DETAILS = """
+    public static final String PERSONAL_DETAILS_JSON = """
 				{
 				    "first_name": "Szymon",
 				    "last_name": "Marciniak",
