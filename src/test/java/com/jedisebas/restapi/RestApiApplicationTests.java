@@ -1,5 +1,6 @@
 package com.jedisebas.restapi;
 
+import com.jedisebas.restapi.constants.JsonRequestProvider;
 import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
@@ -32,32 +33,15 @@ class RestApiApplicationTests {
 	private PersonalDetailsService service;
 
 	@Test
-	void contextLoads() {
-		assertEquals(1, 1);
-	}
-
-	@Test
 	void personalDetailsCreate() throws Exception {
-		PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
-		String ownJson = """
-				{
-				    "first_name": "Szymon",
-				    "last_name": "Marciniak",
-				    "email": "szymonmarciniak@gmail.com",
-				    "address": {
-				        "city": "Gdansk",
-				        "street": "Jana z Kolna",
-				        "house_number": "11"
-				    }
-				}
-				""";
+		final PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(ownJson)
+				.content(JsonRequestProvider.EVENT_PERSONAL_DETAILS)
 		);
 
-		PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
+		final PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
 
 		assertEquals(personalDetailsDto.getEmail(), testIfWorks.getEmail());
 	}
