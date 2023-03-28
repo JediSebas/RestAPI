@@ -1,5 +1,6 @@
 package com.jedisebas.restapi;
 
+import com.jedisebas.restapi.constants.JsonRequestProvider;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -8,6 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,21 +29,12 @@ class EndToEndEventTest {
 
     @Test
     void givenPostRequest() {
-        final String json = """
-
-                {
-                    "title": "Tech3camp",
-                    "date": "2023-03-23 17:35:00",
-                    "description": "Lorem ipsum dolor sentio amo is"
-                }
-                """;
-
         final Response response = request
                 .contentType(ContentType.JSON)
-                .body(json)
+                .body(JsonRequestProvider.eventJson)
                 .post();
 
-        assertEquals(201, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
 
         final String jsonResult = response.getBody().asString();
 
@@ -56,6 +49,6 @@ class EndToEndEventTest {
                 .contentType(ContentType.JSON)
                 .get();
 
-        assertEquals(200, response.getStatusCode());
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
     }
 }
