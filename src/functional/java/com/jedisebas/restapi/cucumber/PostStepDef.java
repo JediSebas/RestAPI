@@ -22,7 +22,7 @@ public class PostStepDef {
 
         response = request
                 .contentType(ContentType.JSON)
-                .body(JsonRequestProvider.eventJson)
+                .body(JsonRequestProvider.EVENT_JSON)
                 .post();
     }
 

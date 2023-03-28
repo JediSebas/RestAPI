@@ -31,7 +31,7 @@ class EndToEndEventTest {
     void givenPostRequest() {
         final Response response = request
                 .contentType(ContentType.JSON)
-                .body(JsonRequestProvider.eventJson)
+                .body(JsonRequestProvider.EVENT_JSON)
                 .post();
 
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
