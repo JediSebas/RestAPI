@@ -15,9 +15,7 @@ public class GetStepDef {
 
     @When("get request is sent to {string}")
     public void getRequestIsSentTo(final String path) {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.basePath = path;
-        RestAssured.port = 8080;
+        CucumberSpringConfiguration.setupConnection(path);
 
         final RequestSpecification request = RestAssured.given();
 

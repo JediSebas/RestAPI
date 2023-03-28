@@ -24,9 +24,7 @@ public class PostStepDef {
                 }
                 """;
 
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.basePath = path;
-        RestAssured.port = 8080;
+        CucumberSpringConfiguration.setupConnection(path);
 
         final RequestSpecification request = RestAssured.given();
 
