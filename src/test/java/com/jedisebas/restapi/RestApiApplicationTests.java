@@ -38,8 +38,7 @@ class RestApiApplicationTests {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(JsonRequestProvider.EVENT_PERSONAL_DETAILS)
-		);
+				.content(JsonRequestProvider.PERSONAL_DETAILS_JSON));
 
 		final PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
 

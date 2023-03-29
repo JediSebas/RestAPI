@@ -27,4 +27,17 @@ public final class JsonRequestProvider {
 				    }
 				}
 				""";
+
+	public static final String EMPTY_PERSONAL_DETAILS_JSON =  """
+				{
+				    "first_name": "",
+				    "last_name": "",
+				    "email": "",
+				    "address": {
+				        "city": "",
+				        "street": "",
+				        "house_number": ""
+				    }
+				}
+				""";
 }
