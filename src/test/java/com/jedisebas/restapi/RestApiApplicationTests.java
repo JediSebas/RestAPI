@@ -38,13 +38,14 @@ class RestApiApplicationTests {
 	void personalDetailsCreate() throws Exception {
 		final PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
+		final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(JsonRequestProvider.PERSONAL_DETAILS_JSON));
+				.content(JsonRequestProvider.PERSONAL_DETAILS_JSON)).andReturn();
 
 		final PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
 
 		assertEquals(personalDetailsDto.getEmail(), testIfWorks.getEmail());
+		assertEquals(HttpStatus.CREATED.value(), mvcResult.getResponse().getStatus());
 	}
 
 	@Test
