@@ -15,7 +15,7 @@ public class GetStepDef {
 
     @When("get request is sent to {string}")
     public void getRequestIsSentTo(final String path) {
-        CucumberSpringConfiguration.setupConnection(path);
+        CucumberSpringConfigurationTest.setupConnection(path);
 
         final RequestSpecification request = RestAssured.given();
 
