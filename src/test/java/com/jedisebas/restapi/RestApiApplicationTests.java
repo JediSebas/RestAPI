@@ -3,8 +3,6 @@ package com.jedisebas.restapi;
 import com.jedisebas.restapi.constants.JsonRequestProvider;
 import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
-import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
-import com.jedisebas.restapi.repository.PersonalDetailsRepository;
 import com.jedisebas.restapi.service.PersonalDetailsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +23,6 @@ class RestApiApplicationTests {
 
 	@Autowired
 	private MockMvc mockMvc;
-
-	@Autowired
-	private PersonalDetailsMapper mapper;
-
-	@Autowired
-	private PersonalDetailsRepository repository;
 
 	@Autowired
 	private PersonalDetailsService service;
