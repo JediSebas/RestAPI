@@ -19,15 +19,18 @@ public class PersonalDetailsService {
 
     private final PersonalDetailsRepository repository;
     private final PersonalDetailsMapper mapper;
+    private final ValidatorService validator;
 
     public CreatedEntityResponse createPersonalDetails(final PersonalDetailsDto personalDto) {
-        ValidatorService validator = new ValidatorService();
-        validator.validatePersonalDetailsDtoFields(personalDto);
+        try {
+            validator.validatePersonalDetailsDtoFields(personalDto);
+            PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);
+            PersonalDetails savedEntity = repository.save(personalDetails);
 
-        PersonalDetails personalDetails = mapper.dtoToEntity(personalDto);
-        PersonalDetails savedEntity = repository.save(personalDetails);
-
-        return mapper.entityToResponse(savedEntity);
+            return mapper.entityToResponse(savedEntity);
+        } catch (final IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+        }
     }
 
     public List<PersonalDetailsDto> fetchAllPersonalDetails() {

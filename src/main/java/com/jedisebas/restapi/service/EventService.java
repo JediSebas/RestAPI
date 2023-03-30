@@ -19,15 +19,18 @@ public class EventService {
 
     private final EventRepository repository;
     private final EventMapper mapper;
+    private final ValidatorService validator;
 
     public CreatedEntityResponse createEvent(final EventDto eventDto) {
-        ValidatorService validator = new ValidatorService();
-        validator.validateEventDtoFields(eventDto);
+        try {
+            validator.validateEventDtoFields(eventDto);
+            Event event = mapper.dtoToEntity(eventDto);
+            Event savedEvent = repository.save(event);
 
-        Event event = mapper.dtoToEntity(eventDto);
-        Event savedEvent = repository.save(event);
-
-        return mapper.entityToResponse(savedEvent);
+            return mapper.entityToResponse(savedEvent);
+        } catch (final IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+        }
     }
 
     public List<EventDto> fetchAllEvents() {
