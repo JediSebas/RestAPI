@@ -50,7 +50,7 @@ class RestApiApplicationTests {
 	}
 
 	@Test
-	void personalDetailsCreateThrowException() throws Exception {
+	void personalDetailsCreateBadRequest() throws Exception {
 		final MvcResult mvcResult = getResult(post(URL), JsonRequestProvider.EMPTY_PERSONAL_DETAILS_JSON);
 
 		assertEquals(HttpStatus.BAD_REQUEST.value(), mvcResult.getResponse().getStatus());
