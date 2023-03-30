@@ -51,20 +51,28 @@ public class PersonalDetailsService {
     }
 
     public PersonalDetailsDto updatePersonalDetails(final int id, final PersonalDetailsDto personalDto) {
-        validator.validatePersonalDetailsDtoFields(personalDto);
+        try {
+            validator.validatePersonalDetailsDtoFields(personalDto);
 
-        final PersonalDetails foundedPerson = repository
-                .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
+            final PersonalDetails foundedPerson = repository
+                    .findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
 
-        foundedPerson.setFirstName(personalDto.getFirstName());
-        foundedPerson.setLastName(personalDto.getLastName());
-        foundedPerson.setEmail(personalDto.getEmail());
-        foundedPerson.setAddress(addressMapper.dtoToEntity(personalDto.getAddress()));
+            foundedPerson.setFirstName(personalDto.getFirstName());
+            foundedPerson.setLastName(personalDto.getLastName());
+            foundedPerson.setEmail(personalDto.getEmail());
+            foundedPerson.setAddress(addressMapper.dtoToEntity(personalDto.getAddress()));
 
-        repository.updateById(foundedPerson.getFirstName(), foundedPerson.getLastName(), foundedPerson.getAddress(),
-                foundedPerson.getEmail(), foundedPerson.getId());
+            update(foundedPerson);
 
-        return mapper.entityToDto(foundedPerson);
+            return mapper.entityToDto(foundedPerson);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+        }
+    }
+
+    private void update(final PersonalDetails personalDetails) {
+        repository.updateById(personalDetails.getFirstName(), personalDetails.getLastName(), personalDetails.getAddress(),
+                personalDetails.getEmail(), personalDetails.getId());
     }
 }
