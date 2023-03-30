@@ -28,6 +28,19 @@ public final class JsonRequestProvider {
 				}
 				""";
 
+	public static final String PERSONAL_DETAILS_JSON2 = """
+				{
+				    "first_name": "Marcin",
+				    "last_name": "Szymoniak",
+				    "email": "asdqwerty@gmail.com",
+				    "address": {
+				        "city": "Gdynia",
+				        "street": "Jana z Kolna",
+				        "house_number": "15"
+				    }
+				}
+				""";
+
 	public static final String EMPTY_PERSONAL_DETAILS_JSON =  """
 				{
 				    "first_name": "",
