@@ -1,5 +1,6 @@
 package com.jedisebas.restapi;
 
+import com.jedisebas.restapi.constants.JsonRequestProvider;
 import com.jedisebas.restapi.constants.TestDataProvider;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
@@ -9,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,33 +35,25 @@ class RestApiApplicationTests {
 	private PersonalDetailsService service;
 
 	@Test
-	void contextLoads() {
-		assertEquals(1, 1);
+	void personalDetailsCreate() throws Exception {
+		final PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
+
+		final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(JsonRequestProvider.PERSONAL_DETAILS_JSON)).andReturn();
+
+		final PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
+
+		assertEquals(personalDetailsDto.getEmail(), testIfWorks.getEmail());
+		assertEquals(HttpStatus.CREATED.value(), mvcResult.getResponse().getStatus());
 	}
 
 	@Test
-	void personalDetailsCreate() throws Exception {
-		PersonalDetailsDto personalDetailsDto = TestDataProvider.createValidPersonalDetailsDto();
-		String ownJson = """
-				{
-				    "first_name": "Szymon",
-				    "last_name": "Marciniak",
-				    "email": "szymonmarciniak@gmail.com",
-				    "address": {
-				        "city": "Gdansk",
-				        "street": "Jana z Kolna",
-				        "house_number": "11"
-				    }
-				}
-				""";
-
-		mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
+	void personalDetailsCreateThrowException() throws Exception {
+		final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/persons")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(ownJson)
-		);
+				.content(JsonRequestProvider.EMPTY_PERSONAL_DETAILS_JSON)).andReturn();
 
-		PersonalDetailsDto testIfWorks = service.fetchPersonalDetails(1);
-
-		assertEquals(personalDetailsDto.getEmail(), testIfWorks.getEmail());
+		assertEquals(HttpStatus.BAD_REQUEST.value(), mvcResult.getResponse().getStatus());
 	}
 }

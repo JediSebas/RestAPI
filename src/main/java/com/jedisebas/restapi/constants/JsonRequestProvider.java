@@ -15,7 +15,7 @@ public final class JsonRequestProvider {
                 }
                 """;
 
-    public static final String EVENT_PERSONAL_DETAILS = """
+    public static final String PERSONAL_DETAILS_JSON = """
 				{
 				    "first_name": "Szymon",
 				    "last_name": "Marciniak",
@@ -24,6 +24,19 @@ public final class JsonRequestProvider {
 				        "city": "Gdansk",
 				        "street": "Jana z Kolna",
 				        "house_number": "11"
+				    }
+				}
+				""";
+
+	public static final String EMPTY_PERSONAL_DETAILS_JSON =  """
+				{
+				    "first_name": "",
+				    "last_name": "",
+				    "email": "",
+				    "address": {
+				        "city": "",
+				        "street": "",
+				        "house_number": ""
 				    }
 				}
 				""";
