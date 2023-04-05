@@ -75,4 +75,36 @@ public class PersonalDetailsService {
         repository.updateById(personalDetails.getFirstName(), personalDetails.getLastName(), personalDetails.getAddress(),
                 personalDetails.getEmail(), personalDetails.getId());
     }
+
+    public List<PersonalDetailsDto> updateManyPersonalDetails(List<PersonalDetailsDto> personalDetailsDtoList) {
+        personalDetailsDtoList.forEach(dto -> {
+            final int id = dto.getId();
+
+            if (id == 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+            }
+
+            final PersonalDetails foundedPerson = repository
+                    .findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
+
+            if (dto.getFirstName() != null) {
+                repository.updateFirstName(id, dto.getFirstName());
+            }
+
+            if (dto.getLastName() != null) {
+                repository.updateLastName(id, dto.getLastName());
+            }
+
+            if (dto.getEmail() != null) {
+                repository.updateEmail(id, dto.getEmail());
+            }
+
+            if (dto.getAddress() != null) {
+                repository.updateAddress(id, dto.getAddress());
+            }
+        });
+
+        return personalDetailsDtoList;
+    }
 }
