@@ -53,4 +53,66 @@ public final class JsonRequestProvider {
 				    }
 				}
 				""";
+
+	public static final String LIST_PERSONAL_DETAILS_JSON = """
+    			[
+    				{
+    					"id": 1,
+    					"first_name": "Maciej"
+    				},
+    				{
+    					"id": 2,
+    					"last_name": "Szymoniak",
+    					"address": {
+    						"city": "Lodz",
+    						"street": "warszawska",
+    						"house_number": 55
+    					}
+    				},
+    				{
+    					"id": 3,
+    					"email": "forexample@example.org"
+    				}
+    			]
+				""";
+
+	public static final String EMPTY_LIST_PERSONAL_DETAILS_JSON = """
+    			[
+    				{
+    					"id": 1,
+    					"first_name": ""
+    				},
+    				{
+    					"id": 2,
+    					"last_name": "",
+    					"address": {
+    						"city": "",
+    						"street": ""
+    					}
+    				},
+    				{
+    					"id": 3,
+    					"email": ""
+    				}
+    			]
+				""";
+
+	public static final String EMPTY_ID_LIST_PERSONAL_DETAILS_JSON = """
+    			[
+    				{
+    					"first_name": "Maciej"
+    				},
+    				{
+    					"last_name": "Szymoniak",
+    					"address": {
+    						"city": "Lodz",
+    						"street": "warszawska",
+    						"house_number": 55
+    					}
+    				},
+    				{
+    					"email": "forexample@example.org"
+    				}
+    			]
+				""";
 }
