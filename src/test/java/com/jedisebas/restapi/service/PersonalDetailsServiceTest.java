@@ -6,7 +6,7 @@ import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
 import com.jedisebas.restapi.mapper.PersonalDetailsMapper;
 import com.jedisebas.restapi.repository.PersonalDetailsRepository;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,8 +36,8 @@ class PersonalDetailsServiceTest {
     @InjectMocks
     private PersonalDetailsService service;
 
-    @Before
-    void setUp() {
+    @BeforeEach
+    public void setUp() {
         reset(mapper, repository);
     }
 

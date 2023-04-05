@@ -3,8 +3,12 @@ package com.jedisebas.restapi.service;
 import com.jedisebas.restapi.dto.AddressDto;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
+import com.jedisebas.restapi.entity.PersonalDetails;
+import com.jedisebas.restapi.mapper.AddressMapper;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.regex.Pattern;
 
@@ -33,6 +37,48 @@ public class ValidatorService {
     public void validateEventDtoFields(final EventDto eventDto) {
         checkIfNull(eventDto);
         checkIfNullOrEmpty(eventDto.getDate(), eventDto.getTitle(), eventDto.getDescription());
+    }
+
+    public void convertDtoToEntityWhenFieldsAreOk(final PersonalDetailsDto dto, final PersonalDetails personalDetails) {
+        if (allowIfNotNullAndNotEmpty(dto.getFirstName())) {
+            personalDetails.setFirstName(dto.getFirstName());
+        }
+
+        if (allowIfNotNullAndNotEmpty(dto.getLastName())) {
+            personalDetails.setLastName(dto.getLastName());
+        }
+
+        if (allowIfNotNullAndNotEmpty(dto.getEmail())) {
+            personalDetails.setEmail(dto.getEmail());
+        }
+
+        final AddressDto address = dto.getAddress();
+        if (address != null) {
+            if (allowIfNotNullAndNotEmpty(address.getCity())) {
+                address.setCity(address.getCity());
+            }
+
+            if (allowIfNotNullAndNotEmpty(address.getCity())) {
+                address.setStreet(address.getStreet());
+            }
+
+            if (allowIfNotNullAndNotEmpty(address.getHouseNumber())) {
+                address.setHouseNumber(address.getHouseNumber());
+            }
+
+            final AddressMapper addressMapper = new AddressMapper();
+            personalDetails.setAddress(addressMapper.dtoToEntity(dto.getAddress()));
+        }
+    }
+
+    private boolean allowIfNotNullAndNotEmpty(String string) {
+        if (string != null) {
+            if (string.trim().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PersonalDetailsService.WRONG_REQUEST_DATA_PROVIDED);
+            }
+            return true;
+        }
+        return false;
     }
 
     private void checkIfNullOrEmpty(String... strings) {

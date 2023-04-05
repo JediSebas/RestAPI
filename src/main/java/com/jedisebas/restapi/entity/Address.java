@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +38,6 @@ public class Address {
 
     private String city;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne(mappedBy = "address", orphanRemoval = true, cascade = CascadeType.ALL)
     private PersonalDetails personalDetails;
 }
