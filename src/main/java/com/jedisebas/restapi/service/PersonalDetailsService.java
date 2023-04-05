@@ -1,5 +1,6 @@
 package com.jedisebas.restapi.service;
 
+import com.jedisebas.restapi.dto.AddressDto;
 import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
@@ -87,18 +88,48 @@ public class PersonalDetailsService {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PERSON_NOT_FOUND));
 
             if (dto.getFirstName() != null) {
+                if (dto.getFirstName().trim().isEmpty()) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
+                }
                 foundedPerson.setFirstName(dto.getFirstName());
             }
 
             if (dto.getLastName() != null) {
+                if (dto.getLastName().trim().isEmpty()) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
+                }
                 foundedPerson.setLastName(dto.getLastName());
             }
 
             if (dto.getEmail() != null) {
+                if (dto.getEmail().trim().isEmpty()) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
+                }
                 foundedPerson.setEmail(dto.getEmail());
             }
 
-            if (dto.getAddress() != null) {
+            final AddressDto address = dto.getAddress();
+            if (address != null) {
+                if (address.getCity() != null) {
+                    if (address.getCity().trim().isEmpty()) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
+                    }
+                    address.setCity(address.getCity());
+                }
+
+                if (address.getStreet() != null) {
+                    if (address.getStreet().trim().isEmpty()) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
+                    }
+                    address.setCity(address.getStreet());
+                }
+
+                if (address.getHouseNumber() != null) {
+                    if (address.getHouseNumber().trim().isEmpty()) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
+                    }
+                    address.setCity(address.getHouseNumber());
+                }
                 foundedPerson.setAddress(addressMapper.dtoToEntity(dto.getAddress()));
             }
 
