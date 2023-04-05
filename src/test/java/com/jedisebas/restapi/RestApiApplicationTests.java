@@ -69,6 +69,32 @@ class RestApiApplicationTests {
 		assertEquals(HttpStatus.NOT_FOUND.value(), mvcResult.getResponse().getStatus());
 	}
 
+	@Test
+	void personalDetailsManyUpdate() throws Exception {
+		getResult(post(URL), JsonRequestProvider.PERSONAL_DETAILS_JSON);
+		getResult(post(URL), JsonRequestProvider.PERSONAL_DETAILS_JSON);
+		getResult(post(URL), JsonRequestProvider.PERSONAL_DETAILS_JSON);
+		final MvcResult mvcResult = getResult(patch(URL), JsonRequestProvider.LIST_PERSONAL_DETAILS_JSON);
+
+		assertEquals(HttpStatus.OK.value(), mvcResult.getResponse().getStatus());
+	}
+
+	@Test
+	void personalDetailsManyUpdateBadRequest() throws Exception {
+		final MvcResult mvcResult = getResult(patch(URL), JsonRequestProvider.EMPTY_LIST_PERSONAL_DETAILS_JSON);
+		final MvcResult mvcResult1 = getResult(patch(URL), JsonRequestProvider.EMPTY_ID_LIST_PERSONAL_DETAILS_JSON);
+
+		assertEquals(HttpStatus.BAD_REQUEST.value(), mvcResult.getResponse().getStatus());
+		assertEquals(HttpStatus.BAD_REQUEST.value(), mvcResult1.getResponse().getStatus());
+	}
+
+	@Test
+	void personalDetailsManyUpdateNotFound() throws Exception {
+		final MvcResult mvcResult = getResult(patch(URL), JsonRequestProvider.NOT_EXISTING_ID_LIST_PERSONAL_DETAILS_JSON);
+
+		assertEquals(HttpStatus.NOT_FOUND.value(), mvcResult.getResponse().getStatus());
+	}
+
 	private MvcResult getResult(MockHttpServletRequestBuilder request, String json) throws Exception {
 		return mockMvc.perform(request
 				.contentType(MediaType.APPLICATION_JSON)
@@ -79,15 +105,15 @@ class RestApiApplicationTests {
 		return MockMvcRequestBuilders.get(url);
 	}
 
-	private MockHttpServletRequestBuilder get(String url, int id) {
-		return get(url + "/" + id);
-	}
-
 	private MockHttpServletRequestBuilder post(String url) {
 		return MockMvcRequestBuilders.post(url);
 	}
 
 	private MockHttpServletRequestBuilder put(String url, int id) {
 		return MockMvcRequestBuilders.put(url + "/" + id);
+	}
+
+	private MockHttpServletRequestBuilder patch(String url) {
+		return MockMvcRequestBuilders.patch(url);
 	}
 }
