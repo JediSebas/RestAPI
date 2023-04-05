@@ -1,6 +1,5 @@
 package com.jedisebas.restapi.service;
 
-import com.jedisebas.restapi.dto.AddressDto;
 import com.jedisebas.restapi.dto.CreatedEntityResponse;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import com.jedisebas.restapi.entity.PersonalDetails;
@@ -87,34 +86,7 @@ public class PersonalDetailsService {
                     .findById(id)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PERSON_NOT_FOUND));
 
-            if (validator.allowIfNotNullAndNotEmpty(dto.getFirstName())) {
-                foundedPerson.setFirstName(dto.getFirstName());
-            }
-
-            if (validator.allowIfNotNullAndNotEmpty(dto.getLastName())) {
-                foundedPerson.setLastName(dto.getLastName());
-            }
-
-            if (validator.allowIfNotNullAndNotEmpty(dto.getEmail())) {
-                foundedPerson.setEmail(dto.getEmail());
-            }
-
-            final AddressDto address = dto.getAddress();
-            if (address != null) {
-                if (validator.allowIfNotNullAndNotEmpty(address.getCity())) {
-                    address.setCity(address.getCity());
-                }
-
-                if (validator.allowIfNotNullAndNotEmpty(address.getCity())) {
-                    address.setStreet(address.getStreet());
-                }
-
-                if (validator.allowIfNotNullAndNotEmpty(address.getHouseNumber())) {
-                    address.setHouseNumber(address.getHouseNumber());
-                }
-
-                foundedPerson.setAddress(addressMapper.dtoToEntity(dto.getAddress()));
-            }
+            validator.convertDtoToEntityWhenFieldsAreOk(dto, foundedPerson);
 
             update(foundedPerson);
         });
