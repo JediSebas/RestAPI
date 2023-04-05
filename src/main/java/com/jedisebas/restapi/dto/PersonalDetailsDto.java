@@ -15,6 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PersonalDetailsDto {
 
+    private int id;
+
     @JsonProperty(DataTransferConstants.FIRST_NAME)
     private String firstName;
 
