@@ -89,19 +89,19 @@ public class PersonalDetailsService {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
 
             if (dto.getFirstName() != null) {
-                repository.updateFirstName(id, dto.getFirstName());
+                repository.updateFirstName(dto.getFirstName(), id);
             }
 
             if (dto.getLastName() != null) {
-                repository.updateLastName(id, dto.getLastName());
+                repository.updateLastName(dto.getLastName(), id);
             }
 
             if (dto.getEmail() != null) {
-                repository.updateEmail(id, dto.getEmail());
+                repository.updateEmail(dto.getEmail(), id);
             }
 
             if (dto.getAddress() != null) {
-                repository.updateAddress(id, dto.getAddress());
+                repository.updateAddress(dto.getAddress(), id);
             }
         });
 
