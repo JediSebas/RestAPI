@@ -71,12 +71,7 @@ public class PersonalDetailsService {
         }
     }
 
-    private void update(final PersonalDetails personalDetails) {
-        repository.updateById(personalDetails.getFirstName(), personalDetails.getLastName(), personalDetails.getAddress(),
-                personalDetails.getEmail(), personalDetails.getId());
-    }
-
-    public List<PersonalDetailsDto> updateManyPersonalDetails(List<PersonalDetailsDto> personalDetailsDtoList) {
+    public List<PersonalDetailsDto> updateManyPersonalDetails(final List<PersonalDetailsDto> personalDetailsDtoList) {
         personalDetailsDtoList.forEach(dto -> {
             final int id = dto.getId();
 
@@ -89,22 +84,29 @@ public class PersonalDetailsService {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
 
             if (dto.getFirstName() != null) {
-                repository.updateFirstName(dto.getFirstName(), id);
+                foundedPerson.setFirstName(dto.getFirstName());
             }
 
             if (dto.getLastName() != null) {
-                repository.updateLastName(dto.getLastName(), id);
+                foundedPerson.setLastName(dto.getLastName());
             }
 
             if (dto.getEmail() != null) {
-                repository.updateEmail(dto.getEmail(), id);
+                foundedPerson.setEmail(dto.getEmail());
             }
 
             if (dto.getAddress() != null) {
-                repository.updateAddress(dto.getAddress(), id);
+                foundedPerson.setAddress(addressMapper.dtoToEntity(dto.getAddress()));
             }
+
+            update(foundedPerson);
         });
 
         return personalDetailsDtoList;
+    }
+
+    private void update(final PersonalDetails personalDetails) {
+        repository.updateById(personalDetails.getFirstName(), personalDetails.getLastName(), personalDetails.getAddress(),
+                personalDetails.getEmail(), personalDetails.getId());
     }
 }
