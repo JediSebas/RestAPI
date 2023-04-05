@@ -64,7 +64,7 @@ class RestApiApplicationTests {
 
 	@Test
 	void personalDetailsUpdateNotFound() throws Exception {
-		final MvcResult mvcResult = getResult(put(URL, 5), JsonRequestProvider.PERSONAL_DETAILS_JSON2);
+		final MvcResult mvcResult = getResult(put(URL, 500), JsonRequestProvider.PERSONAL_DETAILS_JSON2);
 
 		assertEquals(HttpStatus.NOT_FOUND.value(), mvcResult.getResponse().getStatus());
 	}
@@ -81,6 +81,9 @@ class RestApiApplicationTests {
 
 	@Test
 	void personalDetailsManyUpdateBadRequest() throws Exception {
+		getResult(post(URL), JsonRequestProvider.PERSONAL_DETAILS_JSON);
+		getResult(post(URL), JsonRequestProvider.PERSONAL_DETAILS_JSON);
+		getResult(post(URL), JsonRequestProvider.PERSONAL_DETAILS_JSON);
 		final MvcResult mvcResult = getResult(patch(URL), JsonRequestProvider.EMPTY_LIST_PERSONAL_DETAILS_JSON);
 		final MvcResult mvcResult1 = getResult(patch(URL), JsonRequestProvider.EMPTY_ID_LIST_PERSONAL_DETAILS_JSON);
 
