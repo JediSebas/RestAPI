@@ -115,4 +115,26 @@ public final class JsonRequestProvider {
     				}
     			]
 				""";
+
+	public static final String NOT_EXISTING_ID_LIST_PERSONAL_DETAILS_JSON = """
+    			[
+    				{
+    					"id": 100,
+    					"first_name": "Maciej"
+    				},
+    				{
+    					"id": 200,
+    					"last_name": "Szymoniak",
+    					"address": {
+    						"city": "Lodz",
+    						"street": "warszawska",
+    						"house_number": 55
+    					}
+    				},
+    				{
+    					"id": 300,
+    					"email": "forexample@example.org"
+    				}
+    			]
+				""";
 }
