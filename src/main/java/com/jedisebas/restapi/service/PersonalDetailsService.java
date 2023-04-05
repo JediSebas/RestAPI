@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PersonalDetailsService {
 
-    private static final String WRONG_REQUEST_DATA_PROVIDED = "wrong request data provided";
+    public static final String WRONG_REQUEST_DATA_PROVIDED = "wrong request data provided";
     public static final String PERSON_NOT_FOUND = "person not found";
 
     private final PersonalDetailsRepository repository;
@@ -87,49 +87,32 @@ public class PersonalDetailsService {
                     .findById(id)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PERSON_NOT_FOUND));
 
-            if (dto.getFirstName() != null) {
-                if (dto.getFirstName().trim().isEmpty()) {
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
-                }
+            if (validator.allowIfNotNullAndNotEmpty(dto.getFirstName())) {
                 foundedPerson.setFirstName(dto.getFirstName());
             }
 
-            if (dto.getLastName() != null) {
-                if (dto.getLastName().trim().isEmpty()) {
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
-                }
+            if (validator.allowIfNotNullAndNotEmpty(dto.getLastName())) {
                 foundedPerson.setLastName(dto.getLastName());
             }
 
-            if (dto.getEmail() != null) {
-                if (dto.getEmail().trim().isEmpty()) {
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
-                }
+            if (validator.allowIfNotNullAndNotEmpty(dto.getEmail())) {
                 foundedPerson.setEmail(dto.getEmail());
             }
 
             final AddressDto address = dto.getAddress();
             if (address != null) {
-                if (address.getCity() != null) {
-                    if (address.getCity().trim().isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
-                    }
+                if (validator.allowIfNotNullAndNotEmpty(address.getCity())) {
                     address.setCity(address.getCity());
                 }
 
-                if (address.getStreet() != null) {
-                    if (address.getStreet().trim().isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
-                    }
-                    address.setCity(address.getStreet());
+                if (validator.allowIfNotNullAndNotEmpty(address.getCity())) {
+                    address.setStreet(address.getStreet());
                 }
 
-                if (address.getHouseNumber() != null) {
-                    if (address.getHouseNumber().trim().isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
-                    }
-                    address.setCity(address.getHouseNumber());
+                if (validator.allowIfNotNullAndNotEmpty(address.getHouseNumber())) {
+                    address.setHouseNumber(address.getHouseNumber());
                 }
+
                 foundedPerson.setAddress(addressMapper.dtoToEntity(dto.getAddress()));
             }
 

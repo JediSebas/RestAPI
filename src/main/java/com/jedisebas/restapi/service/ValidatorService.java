@@ -4,7 +4,9 @@ import com.jedisebas.restapi.dto.AddressDto;
 import com.jedisebas.restapi.dto.EventDto;
 import com.jedisebas.restapi.dto.PersonalDetailsDto;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.regex.Pattern;
 
@@ -33,6 +35,16 @@ public class ValidatorService {
     public void validateEventDtoFields(final EventDto eventDto) {
         checkIfNull(eventDto);
         checkIfNullOrEmpty(eventDto.getDate(), eventDto.getTitle(), eventDto.getDescription());
+    }
+
+    public boolean allowIfNotNullAndNotEmpty(String string) {
+        if (string != null) {
+            if (string.trim().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, PersonalDetailsService.WRONG_REQUEST_DATA_PROVIDED);
+            }
+            return true;
+        }
+        return false;
     }
 
     private void checkIfNullOrEmpty(String... strings) {
