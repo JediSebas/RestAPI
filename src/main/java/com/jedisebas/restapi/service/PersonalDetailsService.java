@@ -18,6 +18,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PersonalDetailsService {
 
+    private static final String WRONG_REQUEST_DATA_PROVIDED = "wrong request data provided";
+    public static final String PERSON_NOT_FOUND = "person not found";
+
     private final PersonalDetailsRepository repository;
     private final PersonalDetailsMapper mapper;
     private final AddressMapper addressMapper;
@@ -31,7 +34,7 @@ public class PersonalDetailsService {
 
             return mapper.entityToResponse(savedEntity);
         } catch (final IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
         }
     }
 
@@ -45,7 +48,7 @@ public class PersonalDetailsService {
     public PersonalDetailsDto fetchPersonalDetails(final int id) {
         final PersonalDetails persons = repository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PERSON_NOT_FOUND));
 
         return mapper.entityToDto(persons);
     }
@@ -56,7 +59,7 @@ public class PersonalDetailsService {
 
             final PersonalDetails foundedPerson = repository
                     .findById(id)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PERSON_NOT_FOUND));
 
             foundedPerson.setFirstName(personalDto.getFirstName());
             foundedPerson.setLastName(personalDto.getLastName());
@@ -67,7 +70,7 @@ public class PersonalDetailsService {
 
             return mapper.entityToDto(foundedPerson);
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
         }
     }
 
@@ -76,12 +79,12 @@ public class PersonalDetailsService {
             final int id = dto.getId();
 
             if (id == 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "wrong request data provided");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, WRONG_REQUEST_DATA_PROVIDED);
             }
 
             final PersonalDetails foundedPerson = repository
                     .findById(id)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "person not found"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PERSON_NOT_FOUND));
 
             if (dto.getFirstName() != null) {
                 foundedPerson.setFirstName(dto.getFirstName());
